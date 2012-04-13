@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <!-- push test -->
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.conf4j</groupId>
-  <artifactId>conf4j-root</artifactId>
-  <packaging>pom</packaging>
-  <version>0.1-SNAPSHOT</version>
-  <name>Conf4j Root</name>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<!-- push test -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.conf4j</groupId>
+	<artifactId>conf4j-root</artifactId>
+	<packaging>pom</packaging>
+	<version>0.1-SNAPSHOT</version>
+	<name>conf4j-root</name>
+	<dependencies>
+		<dependency>
+			<groupId>org.conf4j</groupId>
+			<artifactId>conf4j-config</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.conf4j</groupId>
+			<artifactId>conf4j-integration</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.conf4j</groupId>
+			<artifactId>conf4j-service</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.conf4j</groupId>
+			<artifactId>conf4j-webapp</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+	</dependencies>
+	<modules>
+		<module>conf4j-config</module>
+		<module>conf4j-integration</module>
+		<module>conf4j-service</module>
+		<module>conf4j-webapp</module>
+	</modules>
 </project>
