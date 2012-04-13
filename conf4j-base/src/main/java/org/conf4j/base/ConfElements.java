@@ -12,6 +12,8 @@
  */
 package org.conf4j.base;
 
+import static org.conf4j.base.dsl.EConfigUsage.*;
+
 import java.lang.reflect.Field;
 
 import org.conf4j.base.dsl.Conf4j;
@@ -22,27 +24,27 @@ public class ConfElements {
     private ConfElements() {
     }
 
-    @Conf4j(value = "${catalina.base}/conf/courtanet_config.properties", //
-    description = "Fichier properties de configuration pour surcharger les valeurs de toutes les variables")
+    @Conf4j(value = "${catalina.base}/conf/conf4j.properties", //
+    description = "Conf4j property file to override configuration variables values")
     public static String configuration_file;
 
-    @Conf4j(value = "${catalina.base}/conf/courtanet_instance_config.properties", //
-    description = "Fichier properties de configuration pour surcharger les valeurs de toutes les variables")
+    @Conf4j(value = "${catalina.base}/conf/instance_conf4j.properties", //
+    description = "Conf4j property file to override configuration variables values per instance")
     public static String instance_configuration_file;
 
     /**
      * @see EConfigUsage
      */
     @Conf4j(value = "unit_test",//
-    description = "Nom de l'application utilisé pour valider les usages de ConfigElement, @see EConfigUsage")
+    description = "Application name used for ConfElement validation, @see EConfigUsage")
     public static String appname;
 
     @Conf4j(value = "false", //
-    description = "Affiche au démarrage de tomcat la configuration des variables déclarées dans ConfElements sur System.out")
+    description = "System.out dump at startup for each variables dÃ©clared as ConfElements ")
     public static String config_dump;
 
     @Conf4j(value = "false", //
-    description = "Affiche au démarrage de tomcat la configuration des variables (systeme/jvm/courtanet sur System.out")
+    description = "System.out dump at startup for each variables (systeme/jvm/ConfElements)")
     public static String full_config_dump;
 
     static {
@@ -80,6 +82,17 @@ public class ConfElements {
     public static String devoxx_home_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Agenda",//
-    description = "the base url for devoxx website")
+    description = "the Agenda url for devoxx website")
     public static String devoxx_agenda_url;
+
+    @Conf4j(value = "${devoxx_base_url}/display/FR12/UnitTest",//
+    usage = unit_test,//
+    description = "the UnitTest url for devoxx website")
+    public static String devoxx_unittest_url;
+    
+
+    @Conf4j(value = "${devoxx_base_url}/display/FR12/Unused",//
+    usage = webapp,//
+    description = "the Unused url for devoxx website")
+    public static String devoxx_unused_url;
 }

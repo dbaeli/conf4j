@@ -10,6 +10,7 @@
 	<groupId>org.conf4j</groupId>
 	<artifactId>conf4j-webapp</artifactId>
 	<name>conf4j-webapp</name>
+	<packaging>war</packaging>
 	<build>
 		<finalName>conf4j-webapp</finalName>
 		<plugins>

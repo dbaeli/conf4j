@@ -64,8 +64,8 @@ public enum ConfServiceImpl implements ConfService {
                     "directory variable ''{0}'' with path ''{1}'' : failure when trying to check folder exists, or create folder.");
     private static final MessageFormat CATEGORY_2_VARIABLE_0_REF_UNKNOWN_VALUE_1 = new MessageFormat(
                     "Configuration variable ''{0}'' refers to unknown parameters that are not macro-expanded (expanded value is ''{1}'').\t//[{2}]");
-    private static final MessageFormat CATEGORY_2_DESCRIPTION_3_EXPANDED_4_VARIABLE_0_VALUE_1 = new MessageFormat(
-                    "## [{2}] {3}\n## expanded to ''{4}''\n{0}={1}");
+    private static final MessageFormat CATEGORY_2_DESCRIPTION_3_EXPANDED_4_ACCESS_5_VARIABLE_0_VALUE_1 = new MessageFormat(
+                    "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}");
     private static final Evaluator EVALUATOR = new ConfEvaluator();
 
     private transient ConfValueMap conf;
@@ -113,12 +113,16 @@ public enum ConfServiceImpl implements ConfService {
 
     @Override
     public final String getValue(String key) {
+        return getValue(key, true);
+    }
+
+    private final String getValue(String key, boolean countAccess) {
         ensureInitialized();
         final ConfValue configValue = conf.get(key);
         if (configValue == null) {
             return null;
         }
-        final String value = configValue.getValue();
+        final String value = configValue.getValue(countAccess);
         try {
             return MacroProcessor.replaceProperties(value, conf, value, EVALUATOR);
         } catch (ParsingException e) {
@@ -163,9 +167,10 @@ public enum ConfServiceImpl implements ConfService {
                 continue;
             }
             final ConfValue value = conf.get(key);
-            os.println(CATEGORY_2_DESCRIPTION_3_EXPANDED_4_VARIABLE_0_VALUE_1.format(new Object[] { key,
-                            value.getValue(), value.getSource(), value.getDescription(), getValue(key) }));
-            final String expandedValue = getValue(key);
+            os.println(CATEGORY_2_DESCRIPTION_3_EXPANDED_4_ACCESS_5_VARIABLE_0_VALUE_1.format(new Object[] { key,
+                            value.getValue(false), value.getSource(), value.getDescription(), getValue(key, false),
+                            value.getAccessCount() }));
+            final String expandedValue = getValue(key, false);
             if (expandedValue != null && expandedValue.indexOf(MacroProcessor.REF_PREFIX) >= 0) {
                 os.println(CATEGORY_2_VARIABLE_0_REF_UNKNOWN_VALUE_1.format(new Object[] { key, expandedValue,
                                 value.getSource() }));

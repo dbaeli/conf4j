@@ -49,10 +49,15 @@ public final class ConfValue {
     }
 
     public String getValue() {
+        return getValue(true);
+    }
+
+    String getValue(boolean countAccess) {
         try {
             return value == null ? "" : value;
         } finally {
-            accessCount++;
+            if (countAccess)
+                accessCount++;
         }
     }
 
