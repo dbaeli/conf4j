@@ -37,6 +37,14 @@ public class ConfElements {
     description = "Nom de l'application utilisé pour valider les usages de ConfigElement, @see EConfigUsage")
     public static String appname;
 
+    @Conf4j(value = "false", //
+    description = "Affiche au démarrage de tomcat la configuration des variables déclarées dans ConfElements sur System.out")
+    public static String config_dump;
+
+    @Conf4j(value = "false", //
+    description = "Affiche au démarrage de tomcat la configuration des variables (systeme/jvm/courtanet sur System.out")
+    public static String full_config_dump;
+
     static {
         if (configuration_file == null) {
             try {
@@ -66,11 +74,11 @@ public class ConfElements {
     @Conf4j(value = "http://localhost",//
     description = "the base url for devoxx website")
     public static String devoxx_base_url;
-    
+
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Accueil",//
     description = "the Accueil url for devoxx website")
     public static String devoxx_home_url;
-    
+
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Agenda",//
     description = "the base url for devoxx website")
     public static String devoxx_agenda_url;

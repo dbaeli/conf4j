@@ -10,10 +10,29 @@
 	<groupId>org.conf4j</groupId>
 	<artifactId>conf4j-webapp</artifactId>
 	<name>conf4j-webapp</name>
+	<build>
+		<finalName>conf4j-webapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<warSourceDirectory>${basedir}/war</warSourceDirectory>
+					<webXml>${basedir}/war/WEB-INF/web.xml</webXml>
+					<containerConfigXML>${basedir}/war/META-INF/context.xml</containerConfigXML>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	<dependencies>
 		<dependency>
 			<groupId>org.conf4j</groupId>
 			<artifactId>conf4j-service</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
