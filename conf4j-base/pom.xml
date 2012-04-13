@@ -8,12 +8,12 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.conf4j</groupId>
-	<artifactId>conf4j-integration</artifactId>
-	<name>conf4j-integration</name>
+	<artifactId>conf4j-base</artifactId>
+	<name>conf4j-base</name>
 	<dependencies>
 		<dependency>
-			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-service</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 	</dependencies>
 </project>
