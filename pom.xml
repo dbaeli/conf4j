@@ -7,28 +7,30 @@
 	<packaging>pom</packaging>
 	<version>0.1-SNAPSHOT</version>
 	<name>conf4j-root</name>
-	<dependencies>
-		<dependency>
-			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-config</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-integration</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-service</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-webapp</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-	</dependencies>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.conf4j</groupId>
+				<artifactId>conf4j-config</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.conf4j</groupId>
+				<artifactId>conf4j-integration</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.conf4j</groupId>
+				<artifactId>conf4j-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.conf4j</groupId>
+				<artifactId>conf4j-webapp</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<modules>
 		<module>conf4j-config</module>
 		<module>conf4j-integration</module>
