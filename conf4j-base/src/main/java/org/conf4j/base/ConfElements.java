@@ -63,7 +63,15 @@ public class ConfElements {
         return false;
     }
 
-    @Conf4j(value = "because of you",//
-    description = "A sample variable use by @SampleServiceWithConf")
-    public static String tell_me_why;
+    @Conf4j(value = "http://localhost",//
+    description = "the base url for devoxx website")
+    public static String devoxx_base_url;
+    
+    @Conf4j(value = "${devoxx_base_url}/display/FR12/Accueil",//
+    description = "the Accueil url for devoxx website")
+    public static String devoxx_home_url;
+    
+    @Conf4j(value = "${devoxx_base_url}/display/FR12/Agenda",//
+    description = "the base url for devoxx website")
+    public static String devoxx_agenda_url;
 }
