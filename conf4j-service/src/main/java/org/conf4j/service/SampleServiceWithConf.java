@@ -5,11 +5,11 @@ import static org.conf4j.base.ConfElements.devoxx_home_url;
 import static org.conf4j.base.impl.ConfServiceImpl.CONF;
 
 public class SampleServiceWithConf {
-    public void askDevoxxHome() {
-        System.out.println("Devoxx home url: " + CONF.getValue(devoxx_home_url));
+    public String getDevoxxHome() {
+        return CONF.getValue(devoxx_home_url);
     }
 
-    public void askDevoxxAgenda() {
-        System.out.println("Devoxx agenda url: " + CONF.getValue(devoxx_agenda_url));
+    public String getDevoxxAgenda() {
+        return CONF.getValue(devoxx_agenda_url);
     }
 }

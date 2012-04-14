@@ -12,9 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.conf4j.service.SampleServiceWithConf;
+
 @WebServlet(urlPatterns = "/index", name = "IndexServlet")
 public class IndexServlet extends HttpServlet {
     private static final long serialVersionUID = 8712805354125783121L;
+
+    private final SampleServiceWithConf scv = new SampleServiceWithConf();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -23,14 +27,14 @@ public class IndexServlet extends HttpServlet {
         out.append("<html>");
         out.append("<body>");
         out.append("<a href=\"");
-        out.append(CONF.getValue(devoxx_home_url));
+        out.append(scv.getDevoxxHome());
         out.append("\">");
-        out.append(CONF.getValue(devoxx_home_url));
+        out.append(scv.getDevoxxHome());
         out.append("</a><br>");
         out.append("<a href=\"");
-        out.append(CONF.getValue(devoxx_agenda_url));
+        out.append(scv.getDevoxxAgenda());
         out.append("\">");
-        out.append(CONF.getValue(devoxx_agenda_url));
+        out.append(scv.getDevoxxAgenda());
         out.append("</a><br>");
         out.append("<hr>");
         out.append("<a href=\"dump\">dump</a><br>");
