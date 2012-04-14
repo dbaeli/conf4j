@@ -36,41 +36,50 @@ public final class Conf4jMojo extends AbstractMojo {
      */
     private File outputDirectory;
 
+    /**
+     * @parameter expression="undefined"
+     * @required
+     */
+    private String usage;
+
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (!outputDirectory.exists())
             throw new MojoFailureException(outputDirectory + " does not directory");
         if (!outputDirectory.isDirectory())
             throw new MojoFailureException(outputDirectory + " is not a directory");
 
-        for (EUsage usage : EUsage.values()) {
-            if (usage == undefined)
+        final EUsage targetUsage;
+        try {
+            targetUsage = EUsage.valueOf(usage);
+        } catch (IllegalArgumentException e) {
+            throw new MojoFailureException(e.getMessage());
+        }
+
+        final StringBuffer buffer = new StringBuffer();
+        for (Field field : ConfElements.class.getDeclaredFields()) {
+            final Conf4j annotation = field.getAnnotation(Conf4j.class);
+            if (annotation == null)
                 continue;
-            final StringBuffer buffer = new StringBuffer();
-            for (Field field : ConfElements.class.getDeclaredFields()) {
-                final Conf4j annotation = field.getAnnotation(Conf4j.class);
-                if (annotation == null)
-                    continue;
-                final String value = annotation.value();
-                final String description = annotation.description();
-                final List<EUsage> usages = Arrays.asList(annotation.usage());
-                final boolean devPurposeOnly = annotation.devPurposeOnly();
-                if (!devPurposeOnly)
-                    continue;
-                if (!usages.contains(usage) && !(usages.size() == 1 && usages.contains(undefined)))
-                    continue;
-                buffer.append(VARIABLE_0_VALUE_1_DESCRIPTION_2.format(new Object[] { field.getName(), value,
-                                description }));
-            }
-            final File file = new File(outputDirectory, conf4j_0_dot_properties.format(new Object[] { usage }));
-            try {
-                IOUtils.write(buffer, new FileOutputStream(file));
-            } catch (FileNotFoundException e) {
-                throw new MojoFailureException(e.getMessage());
-            } catch (IOException e) {
-                throw new MojoFailureException(e.getMessage());
-            } finally {
-                getLog().info("written: " + file);
-            }
+            final String value = annotation.value();
+            final String description = annotation.description();
+            final List<EUsage> usages = Arrays.asList(annotation.usage());
+            final boolean devPurposeOnly = annotation.devPurposeOnly();
+            if (!devPurposeOnly)
+                continue;
+            if (!usages.contains(targetUsage) && !(usages.size() == 1 && usages.contains(undefined)))
+                continue;
+            buffer.append(VARIABLE_0_VALUE_1_DESCRIPTION_2.format(new Object[] { field.getName(), value, description }));
+        }
+        final File file = new File(outputDirectory, conf4j_0_dot_properties.format(new Object[] { targetUsage }));
+        try {
+            IOUtils.write(buffer, new FileOutputStream(file));
+        } catch (FileNotFoundException e) {
+            throw new MojoFailureException(e.getMessage());
+        } catch (IOException e) {
+            throw new MojoFailureException(e.getMessage());
+        } finally {
+            getLog().info("written: " + file);
         }
     }
+
 }

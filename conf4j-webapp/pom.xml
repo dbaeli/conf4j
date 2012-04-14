@@ -29,6 +29,9 @@
 				<version>0.1-SNAPSHOT</version>
 				<executions>
 					<execution>
+						<configuration>
+							<usage>webapp</usage>
+						</configuration>
 						<goals>
 							<goal>generate</goal>
 						</goals>
