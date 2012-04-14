@@ -1,6 +1,6 @@
 package org.conf4j.maven;
 
-import static org.conf4j.base.dsl.EConfigUsage.undefined;
+import static org.conf4j.base.dsl.EUsage.undefined;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,11 +15,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-
 import org.conf4j.base.ConfElements;
 import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EEnvironment;
-import org.conf4j.base.dsl.EConfigUsage;
+import org.conf4j.base.dsl.EUsage;
 
 /*
  * Copyright (C) by Courtanet, All Rights Reserved.
@@ -44,7 +42,7 @@ public final class Conf4jMojo extends AbstractMojo {
         if (!outputDirectory.isDirectory())
             throw new MojoFailureException(outputDirectory + " is not a directory");
 
-        for (EConfigUsage usage : EConfigUsage.values()) {
+        for (EUsage usage : EUsage.values()) {
             if (usage == undefined)
                 continue;
             final StringBuffer buffer = new StringBuffer();
@@ -54,9 +52,9 @@ public final class Conf4jMojo extends AbstractMojo {
                     continue;
                 final String value = annotation.value();
                 final String description = annotation.description();
-                final List<EConfigUsage> usages = Arrays.asList(annotation.usage());
-                final EEnvironment defaultEnv = annotation.environment();
-                if (defaultEnv == EEnvironment.prod)
+                final List<EUsage> usages = Arrays.asList(annotation.usage());
+                final boolean devPurposeOnly = annotation.devPurposeOnly();
+                if (!devPurposeOnly)
                     continue;
                 if (!usages.contains(usage) && !(usages.size() == 1 && usages.contains(undefined)))
                     continue;

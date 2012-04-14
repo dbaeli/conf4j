@@ -12,13 +12,13 @@
  */
 package org.conf4j.base;
 
-import static org.conf4j.base.dsl.EEnvironment.dev;
-import static org.conf4j.base.dsl.EConfigUsage.*;
+import static org.conf4j.base.dsl.EUsage.unit_test;
+import static org.conf4j.base.dsl.EUsage.webapp;
 
 import java.lang.reflect.Field;
 
 import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EConfigUsage;
+import org.conf4j.base.dsl.EUsage;
 
 public class ConfElements {
 
@@ -34,16 +34,16 @@ public class ConfElements {
     public static String instance_configuration_file;
 
     /**
-     * @see EConfigUsage
+     * @see EUsage
      */
     @Conf4j(value = "unit_test",//
     description = "Application name used for ConfElement validation, @see EConfigUsage", //
-    environment = dev)
+    devPurposeOnly = true)
     public static String appname;
 
     @Conf4j(value = "false", //
     description = "System.out dump at startup for each variables declared as ConfElements", //
-    environment = dev)
+    devPurposeOnly = true)
     public static String config_dump;
 
     @Conf4j(value = "false", //
@@ -78,7 +78,7 @@ public class ConfElements {
 
     @Conf4j(value = "http://localhost",//
     description = "the base url for devoxx website", //
-    environment = dev)
+    devPurposeOnly = true)
     public static String devoxx_base_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Accueil",//
@@ -93,7 +93,6 @@ public class ConfElements {
     usage = unit_test,//
     description = "the UnitTest url for devoxx website")
     public static String devoxx_unittest_url;
-    
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Unused",//
     usage = webapp,//

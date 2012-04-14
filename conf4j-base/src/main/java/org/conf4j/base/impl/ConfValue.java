@@ -15,16 +15,15 @@ package org.conf4j.base.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.conf4j.base.dsl.EConfigUsage;
-import org.conf4j.base.dsl.EEnvironment;
+import org.conf4j.base.dsl.EUsage;
 
 public final class ConfValue {
     private String value;
     private String expandedValue;
     private final ESource source;
     private final String description;
-    private final List<EConfigUsage> usages;
-    private final EEnvironment defaultEnv;
+    private final List<EUsage> usages;
+    private final boolean devPurposeOnly;
     private int accessCount = 0;
 
     public enum ESource {
@@ -32,20 +31,19 @@ public final class ConfValue {
     }
 
     public ConfValue(ESource source) {
-        this(null, source, null, Arrays.asList(new EConfigUsage[] { EConfigUsage.undefined }), EEnvironment.prod);
+        this(null, source, null, Arrays.asList(new EUsage[] { EUsage.undefined }), false);
     }
 
     public ConfValue(String value, ESource source) {
-        this(value, source, null, Arrays.asList(new EConfigUsage[] { EConfigUsage.undefined }), EEnvironment.prod);
+        this(value, source, null, Arrays.asList(new EUsage[] { EUsage.undefined }), false);
     }
 
-    public ConfValue(String value, ESource source, String description, List<EConfigUsage> usages,
-                    EEnvironment defaultEnv) {
+    public ConfValue(String value, ESource source, String description, List<EUsage> usages, boolean devPurposeOnly) {
         this.value = value;
         this.source = source;
         this.description = description;
         this.usages = usages;
-        this.defaultEnv = defaultEnv;
+        this.devPurposeOnly = devPurposeOnly;
     }
 
     public String getValue() {
@@ -85,11 +83,11 @@ public final class ConfValue {
         return !value.equals(expandedValue);
     }
 
-    public List<EConfigUsage> getUsages() {
+    public List<EUsage> getUsages() {
         return usages;
     }
 
-    public EEnvironment getDefaultEnv() {
-        return defaultEnv;
+    public boolean isDevPurposeOnly() {
+        return devPurposeOnly;
     }
 }
