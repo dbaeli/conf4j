@@ -12,6 +12,7 @@
  */
 package org.conf4j.base;
 
+import static org.conf4j.base.dsl.EEnvironment.dev;
 import static org.conf4j.base.dsl.EConfigUsage.*;
 
 import java.lang.reflect.Field;
@@ -36,11 +37,13 @@ public class ConfElements {
      * @see EConfigUsage
      */
     @Conf4j(value = "unit_test",//
-    description = "Application name used for ConfElement validation, @see EConfigUsage")
+    description = "Application name used for ConfElement validation, @see EConfigUsage", //
+    environment = dev)
     public static String appname;
 
     @Conf4j(value = "false", //
-    description = "System.out dump at startup for each variables declared as ConfElements ")
+    description = "System.out dump at startup for each variables declared as ConfElements", //
+    environment = dev)
     public static String config_dump;
 
     @Conf4j(value = "false", //
@@ -74,7 +77,8 @@ public class ConfElements {
     }
 
     @Conf4j(value = "http://localhost",//
-    description = "the base url for devoxx website")
+    description = "the base url for devoxx website", //
+    environment = dev)
     public static String devoxx_base_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Accueil",//

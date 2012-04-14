@@ -23,6 +23,18 @@
 					<containerConfigXML>${basedir}/war/META-INF/context.xml</containerConfigXML>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.conf4j</groupId>
+				<artifactId>conf4j-mojo</artifactId>
+				<version>0.1-SNAPSHOT</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
