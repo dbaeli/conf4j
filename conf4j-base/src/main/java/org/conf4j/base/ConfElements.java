@@ -40,7 +40,7 @@ public class ConfElements {
     public static String appname;
 
     @Conf4j(value = "false", //
-    description = "System.out dump at startup for each variables déclared as ConfElements ")
+    description = "System.out dump at startup for each variables declared as ConfElements ")
     public static String config_dump;
 
     @Conf4j(value = "false", //
