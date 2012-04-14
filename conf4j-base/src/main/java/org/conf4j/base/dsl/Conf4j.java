@@ -28,9 +28,9 @@ import java.lang.annotation.Target;
 public @interface Conf4j {
 	String value();
 
-	EConfigUsage[] usage() default { EConfigUsage.undefined };
+	EUsage[] usage() default { EUsage.undefined };
 
 	String description() default "";
 
-	EEnvironment environment() default EEnvironment.prod;
+	boolean devPurposeOnly() default false;
 }

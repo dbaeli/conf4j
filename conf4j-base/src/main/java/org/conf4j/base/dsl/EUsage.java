@@ -18,7 +18,8 @@
  */
 package org.conf4j.base.dsl;
 
-public enum EEnvironment {
-	prod, //
-	dev;
+public enum EUsage {
+	undefined, //
+	webapp, //
+	unit_test;
 }

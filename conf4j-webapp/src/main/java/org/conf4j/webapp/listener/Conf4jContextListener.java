@@ -9,7 +9,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.conf4j.base.dsl.EConfigUsage;
+import org.conf4j.base.dsl.EUsage;
 
 @WebListener("Conf4jContextListener")
 public class Conf4jContextListener implements ServletContextListener {
@@ -17,7 +17,7 @@ public class Conf4jContextListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Conf4jContextListener#contextInitialized [started]");
-        CONF.setValue(appname, EConfigUsage.webapp.name());
+        CONF.setValue(appname, EUsage.webapp.name());
         CONF.initFolders();
         if (CONF.getBooleanValue(full_config_dump))
             CONF.dumpConf(System.out, false);

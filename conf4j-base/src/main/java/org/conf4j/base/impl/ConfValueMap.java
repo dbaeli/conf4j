@@ -12,8 +12,8 @@
  */
 package org.conf4j.base.impl;
 
-import static org.conf4j.base.dsl.EConfigUsage.undefined;
-import static org.conf4j.base.dsl.EConfigUsage.unit_test;
+import static org.conf4j.base.dsl.EUsage.undefined;
+import static org.conf4j.base.dsl.EUsage.unit_test;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -24,8 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.conf4j.base.ConfElements;
-import org.conf4j.base.dsl.EConfigUsage;
-import org.conf4j.base.dsl.EEnvironment;
+import org.conf4j.base.dsl.EUsage;
 import org.conf4j.base.impl.ConfValue.ESource;
 
 public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
@@ -36,19 +35,19 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
                     "usage ''{0}'' not found for config element ''{1}'' and source ''{2}''");
     private MessageFormat USAGE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1 = new MessageFormat(
                     "usage ''{0}'' seems to be unused for usage ''{1}''");
-    static final List<EConfigUsage> UNDEFINED_USAGE = Arrays.asList(new EConfigUsage[] { EConfigUsage.undefined });
+    static final List<EUsage> UNDEFINED_USAGE = Arrays.asList(new EUsage[] { EUsage.undefined });
 
     public ConfValue put(String name, String value, ESource source) {
         final ConfValue configValue = get(name);
         final String description = configValue == null ? "" : configValue.getDescription();
-        final List<EConfigUsage> usages = configValue == null ? UNDEFINED_USAGE : configValue.getUsages();
-        final EEnvironment env = configValue == null ? EEnvironment.prod : configValue.getDefaultEnv();
-        return put(name, new ConfValue(value, source, description, usages, env));
+        final List<EUsage> usages = configValue == null ? UNDEFINED_USAGE : configValue.getUsages();
+        final boolean devPurposeOnly = configValue == null ? false : configValue.isDevPurposeOnly();
+        return put(name, new ConfValue(value, source, description, usages, devPurposeOnly));
     }
 
     public final void checkUsage(ConfValue value, String name, PrintStream os) throws IOException {
         final ConfValue appname = super.get(ConfElements.appname);
-        final EConfigUsage usage = appname == null ? undefined : EConfigUsage.valueOf(appname.getValue(false));
+        final EUsage usage = appname == null ? undefined : EUsage.valueOf(appname.getValue(false));
         if (value == null)
             return;
         if (usage == null) {
@@ -69,7 +68,7 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
         final ConfValue appname = super.get(ConfElements.appname);
         if (appname == null)
             return;
-        final EConfigUsage usage = EConfigUsage.valueOf(appname.getValue(false));
+        final EUsage usage = EUsage.valueOf(appname.getValue(false));
         if (usage == null)
             return;
         if (usage == unit_test)
