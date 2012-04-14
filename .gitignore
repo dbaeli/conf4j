@@ -17,3 +17,5 @@ conf4j-base/target/*
 conf4j-mojo/.classpath
 conf4j-mojo/.project
 conf4j-mojo/target/*
+*.iml
+*.idea
