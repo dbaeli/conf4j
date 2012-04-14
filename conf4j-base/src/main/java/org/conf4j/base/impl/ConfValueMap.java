@@ -48,7 +48,7 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
 
     public final void checkUsage(ConfValue value, String name, PrintStream os) throws IOException {
         final ConfValue appname = super.get(ConfElements.appname);
-        final EConfigUsage usage = appname == null ? undefined : EConfigUsage.valueOf(appname.getValue());
+        final EConfigUsage usage = appname == null ? undefined : EConfigUsage.valueOf(appname.getValue(false));
         if (value == null)
             return;
         if (usage == null) {
@@ -69,7 +69,7 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
         final ConfValue appname = super.get(ConfElements.appname);
         if (appname == null)
             return;
-        final EConfigUsage usage = EConfigUsage.valueOf(appname.getValue());
+        final EConfigUsage usage = EConfigUsage.valueOf(appname.getValue(false));
         if (usage == null)
             return;
         if (usage == unit_test)

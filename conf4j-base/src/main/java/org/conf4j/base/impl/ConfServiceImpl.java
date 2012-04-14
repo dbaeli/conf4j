@@ -67,6 +67,7 @@ public enum ConfServiceImpl implements ConfService {
     private static final MessageFormat CATEGORY_2_DESCRIPTION_3_EXPANDED_4_ACCESS_5_VARIABLE_0_VALUE_1 = new MessageFormat(
                     "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}");
     private static final Evaluator EVALUATOR = new ConfEvaluator();
+    private static final Evaluator EVALUATOR_no_access_count = new ConfEvaluator(false);
 
     private transient ConfValueMap conf;
     private transient ConfException initException;
@@ -124,7 +125,8 @@ public enum ConfServiceImpl implements ConfService {
         }
         final String value = configValue.getValue(countAccess);
         try {
-            return MacroProcessor.replaceProperties(value, conf, value, EVALUATOR);
+            return MacroProcessor.replaceProperties(value, conf, value, countAccess ? EVALUATOR
+                            : EVALUATOR_no_access_count);
         } catch (ParsingException e) {
             throw new RuntimeException(value, e);
         }
@@ -141,7 +143,7 @@ public enum ConfServiceImpl implements ConfService {
         ensureInitialized();
         key = normalise(key, CUSTOM, value);
         final ConfValue configValue = conf.put(key, value, CUSTOM);
-        return configValue != null ? configValue.getValue() : null;
+        return configValue != null ? configValue.getValue(false) : null;
     }
 
     @Override
@@ -301,8 +303,8 @@ public enum ConfServiceImpl implements ConfService {
             return;
         final Properties properties = new Properties();
         try {
-            final ConfEvaluator evaluator = new ConfEvaluator();
-            final InputStream is = new FileInputStream(MacroProcessor.replaceProperties(filePath.getValue(), conf,
+            final ConfEvaluator evaluator = new ConfEvaluator(false);
+            final InputStream is = new FileInputStream(MacroProcessor.replaceProperties(filePath.getValue(false), conf,
                             settingKey, evaluator));
             try {
                 properties.load(is);
