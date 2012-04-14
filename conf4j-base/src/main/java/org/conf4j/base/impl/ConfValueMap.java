@@ -59,7 +59,7 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
             return;
         if (value.getUsages().size() == 1 && value.getUsages().contains(undefined))
             return;
-        if (!value.getUsages().contains(usage)) {
+        if (!value.getUsages().contains(usage) && value.getAccessCount() > 0) {
             os.println(USAGE_0_NOT_FOUND_FOR_ELT_1_SOURCE_2.format(new Object[] { usage, name, value.getSource() }));
             return;
         }

@@ -1,8 +1,5 @@
 package org.conf4j.webapp.servlet;
 
-import static org.conf4j.base.ConfElements.*;
-import static org.conf4j.base.impl.ConfServiceImpl.CONF;
-
 import java.io.IOException;
 import java.io.Writer;
 
@@ -26,16 +23,25 @@ public class IndexServlet extends HttpServlet {
         resp.setContentType("text/html");
         out.append("<html>");
         out.append("<body>");
+        
         out.append("<a href=\"");
         out.append(scv.getDevoxxHome());
         out.append("\">");
         out.append(scv.getDevoxxHome());
         out.append("</a><br>");
+        
         out.append("<a href=\"");
         out.append(scv.getDevoxxAgenda());
         out.append("\">");
         out.append(scv.getDevoxxAgenda());
         out.append("</a><br>");
+        
+        out.append("<a href=\"");
+        out.append(scv.getDevoxxUnitTest());
+        out.append("\">");
+        out.append(scv.getDevoxxUnitTest());
+        out.append("</a><br>");
+        
         out.append("<hr>");
         out.append("<a href=\"dump\">dump</a><br>");
         out.append("<a href=\"fulldump\">fulldump</a><br>");
