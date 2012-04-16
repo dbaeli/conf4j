@@ -18,7 +18,7 @@ public class Conf4jContextListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("**********************************************************************************************************************************");
         System.err.println("*");
-        System.out.println("*  Conf4jContextListener#contextInitialized [starting ...]");
+        System.out.println("*  Conf4jContextListener#contextInitialized [starting    ...]");
         System.err.println("*");
         System.out.println("**********************************************************************************************************************************");
         try {
