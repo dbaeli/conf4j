@@ -19,3 +19,8 @@ conf4j-mojo/.project
 conf4j-mojo/target/*
 *.iml
 *.idea
+
+conf4j-base/.settings/
+conf4j-mojo/.settings/
+conf4j-service/.settings/
+conf4j-webapp/.settings/
