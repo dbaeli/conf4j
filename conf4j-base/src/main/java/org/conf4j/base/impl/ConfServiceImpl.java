@@ -12,6 +12,7 @@
  */
 package org.conf4j.base.impl;
 
+import static org.conf4j.base.ConfElements.isConfigElement;
 import static org.conf4j.base.ConfElements.configuration_file;
 import static org.conf4j.base.ConfElements.instance_configuration_file;
 import static org.conf4j.base.impl.ConfValue.ESource.CONFIG_FILE;
@@ -66,6 +67,8 @@ public enum ConfServiceImpl implements ConfService {
                     "Configuration variable ''{0}'' refers to unknown parameters that are not macro-expanded (expanded value is ''{1}'').\t//[{2}]");
     private static final MessageFormat CATEGORY_2_DESCRIPTION_3_EXPANDED_4_ACCESS_5_VARIABLE_0_VALUE_1 = new MessageFormat(
                     "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}");
+    private static final MessageFormat VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER = new MessageFormat(
+                    "Variable ''{0}'' is not declared as ConfElements#{0}");
     private static final Evaluator EVALUATOR = new ConfEvaluator();
     private static final Evaluator EVALUATOR_no_access_count = new ConfEvaluator(false);
 
@@ -165,7 +168,7 @@ public enum ConfServiceImpl implements ConfService {
         Collections.sort(keyList);
 
         for (String key : keyList) {
-            if (filter && !ConfElements.isConfigElement(key)) {
+            if (filter && !isConfigElement(key)) {
                 continue;
             }
             final ConfValue value = conf.get(key);
@@ -321,6 +324,8 @@ public enum ConfServiceImpl implements ConfService {
             String name = (String) e.nextElement();
             final String value = properties.getProperty(name);
             name = normalise(name, source, value);
+            if (!isConfigElement(name))
+                throw new ConfException(VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER.format(new String[] { name }));
             conf.put(name, value, source);
         }
     }
