@@ -12,7 +12,7 @@
 	<name>conf4j-webapp</name>
 	<packaging>war</packaging>
 	<build>
-		<finalName>conf4j-webapp</finalName>
+		<finalName>conf4j</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>

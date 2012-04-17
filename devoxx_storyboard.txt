@@ -19,6 +19,17 @@
 * Ajouter -Ddevoxx_base_url=http://test.devoxx.fr au VM argument
   -> Success
 
+* Ajouter -Dconfiguration_file=c:/Users/gdu/Desktop/conf4j.properties
+  -> Creer un ficher conf4j.properties
+  -> Supprimer -Ddevoxx_base_url=http://test.devoxx.fr
+  -> Relancer le test
+  -> Failed
+
+* Editer c:/Users/gdu/Desktop/conf4j.properties
+  -> ajouter devoxx_base_url=http://test.devoxx.fr
+  -> Relancer le test
+  -> Success
+
 * Ouvrir le pom.xml du projet 'conf4j-service'
   -> monter la configuration du plugin 'maven-surefire-plugin'
 
@@ -28,7 +39,7 @@
 * Editer la valeur de 'devoxx_base_url' dans le pom.xml du projet 'conf4j-service'
   -> Failed
 
-* Deployer conf4j-webapp\target\conf4j-webapp.war dans un tomcat vierge
+* Deployer conf4j-webapp\target\conf4j.war dans un tomcat vierge
 
 * Demarrer le tomcat
 
@@ -40,16 +51,16 @@
   *
   ******************************************************************
 
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/'
+* Ouvrir l'url 'http://localhost:8080/conf4j/'
   -> on voit les deux url 'http://localhost/display/FR12/Accueil' et 'http://localhost/display/FR12/UnitTest'
 
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/dump'
+* Ouvrir l'url 'http://localhost:8080/conf4j/dump'
   -> comparer avec les valeurs dans la classe 'ConfElements'
 
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/fulldump'
+* Ouvrir l'url 'http://localhost:8080/conf4j/fulldump'
   -> rechercher 'java.io.tmpdir'
 
-* Copier le fichier 'conf4j-webapp\target\conf4j_webapp.properties' dans 'apache-tomcat-7.0.27\conf\conf4j.properties'
+* Copier le fichier 'conf4j\target\conf4j_webapp.properties' dans 'apache-tomcat-7.0.27\conf\conf4j.properties'
   -> éditer ce fichier 'config_dump=true' & 'devoxx_base_url=http://www.devoxx.fr'
 
 * Demarrer le tomcat
@@ -66,7 +77,7 @@
 
   (...)
 
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/unused' sans ouvrir 'http://localhost:8080/conf4j-webapp/'
+* Ouvrir l'url 'http://localhost:8080/conf4j/unused' sans ouvrir 'http://localhost:8080/conf4j/'
   ------------------------------------------------------------------------------------------
   -------------------------------------- CHECK UNUSED --------------------------------------
   ------------------------------------------------------------------------------------------
@@ -75,20 +86,20 @@
   scope 'devoxx_agenda_url' seems to be unused for scope 'webapp'
   ------------------------------------------------------------------------------------------
   
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/scope' sans ouvrir 'http://localhost:8080/conf4j-webapp/'
+* Ouvrir l'url 'http://localhost:8080/conf4j/scope' sans ouvrir 'http://localhost:8080/conf4j/'
   ----------------------------------------------------------------------------------------
   ------------------------------------- CHECK SCOPE --------------------------------------
   ----------------------------------------------------------------------------------------
   ----------------------------------------------------------------------------------------
 
-* Ouvrir l'url 'http://localhost:8080/conf4j-webapp' puis réouvrir 'http://localhost:8080/conf4j-webapp/unused'
+* Ouvrir l'url 'http://localhost:8080/conf4j' puis réouvrir 'http://localhost:8080/conf4j/unused'
   ------------------------------------------------------------------------------------------
   -------------------------------------- CHECK UNUSED --------------------------------------
   ------------------------------------------------------------------------------------------
   scope 'devoxx_agenda_url' seems to be unused for scope 'webapp'
   ------------------------------------------------------------------------------------------
   
-* réouvrir 'http://localhost:8080/conf4j-webapp/scope'
+* réouvrir 'http://localhost:8080/conf4j/scope'
   ----------------------------------------------------------------------------------------
   ------------------------------------- CHECK SCOPE --------------------------------------
   ----------------------------------------------------------------------------------------
