@@ -288,7 +288,7 @@ public enum ConfServiceImpl implements ConfService {
      * 
      * WARNING: do NOT macro-expand ''configuration_file''. Indeed, this parameter A points itself to a file that
      * contains parameters B,C,D... that could be part of the parameter A definition. This being inconsistent, the
-     * solution chosen is NOT to macro-expand 'prima_configuration_file' value.
+     * solution chosen is NOT to macro-expand 'configuration_file' value.
      */
     private static final void initPublicFile(ConfValueMap conf) throws ConfException {
         final ConfValue filePath = conf.get(configuration_file);
