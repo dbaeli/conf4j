@@ -95,9 +95,4 @@ public class ConfElements {
     scope = unit_test,//
     description = "the UnitTest url for devoxx website")
     public static String devoxx_unittest_url;
-
-    @Conf4j(value = "${devoxx_base_url}/display/FR12/Unused",//
-    scope = webapp,//
-    description = "the Unused url for devoxx website")
-    public static String devoxx_unused_url;
 }

@@ -22,25 +22,26 @@ public class IndexServlet extends HttpServlet {
         final Writer out = resp.getWriter();
         resp.setContentType("text/html");
         out.append("<html>");
+        out.append("<head>");
+        out.append("<style type=\"text/css\">body { font-family: helvetica, sans-serif, Arial; font-size: 14px; }</style>");
+        out.append("</head>");
         out.append("<body>");
-
-        out.append("<a href=\"");
-        out.append(scv.getDevoxxHome());
-        out.append("\">");
-        out.append(scv.getDevoxxHome());
-        out.append("</a><br>");
-
-        out.append("<a href=\"");
-        out.append(scv.getDevoxxUnitTest());
-        out.append("\">");
-        out.append(scv.getDevoxxUnitTest());
-        out.append("</a><br>");
-
+        
+        out.append("<a href=\"dump\">dump</a> | <a href=\"fulldump\">fulldump</a> | <a href=\"usage\">usage</a> | <a href=\"unused\">unused</a>");
         out.append("<hr>");
-        out.append("<a href=\"dump\">dump</a><br>");
-        out.append("<a href=\"fulldump\">fulldump</a><br>");
-        out.append("<a href=\"usage\">usage</a><br>");
-        out.append("<a href=\"unused\">unused</a><br>");
+
+        out.append("<a href=\"");
+        out.append(scv.getDevoxxHome());
+        out.append("\">");
+        out.append(scv.getDevoxxHome());
+        out.append("</a><br>");
+
+        out.append("<a href=\"");
+        out.append(scv.getDevoxxUnitTest());
+        out.append("\">");
+        out.append(scv.getDevoxxUnitTest());
+        out.append("</a><hr>");
+
         out.append("</body>");
         out.append("</html>");
         out.close();

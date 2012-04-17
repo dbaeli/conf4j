@@ -66,7 +66,7 @@ public enum ConfServiceImpl implements ConfService {
     private static final MessageFormat CATEGORY_2_VARIABLE_0_REF_UNKNOWN_VALUE_1 = new MessageFormat(
                     "Configuration variable ''{0}'' refers to unknown parameters that are not macro-expanded (expanded value is ''{1}'').\t//[{2}]");
     private static final MessageFormat CATEGORY_2_DESCRIPTION_3_EXPANDED_4_ACCESS_5_VARIABLE_0_VALUE_1 = new MessageFormat(
-                    "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}");
+                    "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}\n");
     private static final MessageFormat VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER = new MessageFormat(
                     "Variable ''{0}'' is not declared as ConfElements#{0}");
     private static final Evaluator EVALUATOR = new ConfEvaluator();
