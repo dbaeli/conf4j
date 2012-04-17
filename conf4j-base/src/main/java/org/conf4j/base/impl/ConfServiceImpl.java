@@ -257,7 +257,7 @@ public enum ConfServiceImpl implements ConfService {
                 continue;
             conf.put(field.getName(),
                             new ConfValue(annotation.value(), DEFAULT, annotation.description(), Arrays
-                                            .asList(annotation.usage()), annotation.devPurposeOnly()));
+                                            .asList(annotation.scope()), annotation.devPurposeOnly()));
         }
     }
 

@@ -1,6 +1,6 @@
 package org.conf4j.webapp.listener;
 
-import static org.conf4j.base.ConfElements.appname;
+import static org.conf4j.base.ConfElements.scope;
 import static org.conf4j.base.ConfElements.config_dump;
 import static org.conf4j.base.ConfElements.full_config_dump;
 import static org.conf4j.base.impl.ConfServiceImpl.CONF;
@@ -9,7 +9,7 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.conf4j.base.dsl.EUsage;
+import org.conf4j.base.dsl.EScope;
 
 @WebListener("Conf4jContextListener")
 public class Conf4jContextListener implements ServletContextListener {
@@ -22,7 +22,7 @@ public class Conf4jContextListener implements ServletContextListener {
         System.err.println("*");
         System.out.println("**********************************************************************************************************************************");
         try {
-            CONF.setValue(appname, EUsage.webapp.name());
+            CONF.setValue(scope, EScope.webapp.name());
             CONF.initFolders();
             if (CONF.getBooleanValue(full_config_dump))
                 CONF.dumpConf(System.out, false);

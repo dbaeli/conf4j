@@ -12,7 +12,7 @@
  */
 package org.conf4j.maven;
 
-import static org.conf4j.base.dsl.EUsage.undefined;
+import static org.conf4j.base.dsl.EScope.undefined;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -29,7 +29,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 import org.conf4j.base.ConfElements;
 import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EUsage;
+import org.conf4j.base.dsl.EScope;
 
 /**
  * @goal generate
@@ -57,9 +57,9 @@ public final class Conf4jMojo extends AbstractMojo {
         if (!outputDirectory.isDirectory())
             throw new MojoFailureException(outputDirectory + " is not a directory");
 
-        final EUsage targetUsage;
+        final EScope targetUsage;
         try {
-            targetUsage = EUsage.valueOf(usage);
+            targetUsage = EScope.valueOf(usage);
         } catch (IllegalArgumentException e) {
             throw new MojoFailureException(e.getMessage());
         }
@@ -71,7 +71,7 @@ public final class Conf4jMojo extends AbstractMojo {
                 continue;
             final String value = annotation.value();
             final String description = annotation.description();
-            final List<EUsage> usages = Arrays.asList(annotation.usage());
+            final List<EScope> usages = Arrays.asList(annotation.scope());
             final boolean devPurposeOnly = annotation.devPurposeOnly();
             if (!devPurposeOnly)
                 continue;

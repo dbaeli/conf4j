@@ -12,13 +12,13 @@
  */
 package org.conf4j.base;
 
-import static org.conf4j.base.dsl.EUsage.unit_test;
-import static org.conf4j.base.dsl.EUsage.webapp;
+import static org.conf4j.base.dsl.EScope.unit_test;
+import static org.conf4j.base.dsl.EScope.webapp;
 
 import java.lang.reflect.Field;
 
 import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EUsage;
+import org.conf4j.base.dsl.EScope;
 
 public class ConfElements {
 
@@ -34,12 +34,11 @@ public class ConfElements {
     public static String instance_configuration_file;
 
     /**
-     * @see EUsage
+     * @see EScope
      */
     @Conf4j(value = "unit_test",//
-    description = "Application name used for ConfElement validation, @see EConfigUsage", //
-    devPurposeOnly = true)
-    public static String appname;
+    description = "Runtime scope used for ConfElement validation, @see EScope")
+    public static String scope;
 
     @Conf4j(value = "false", //
     description = "System.out dump at startup for each variables declared as ConfElements", //
@@ -78,24 +77,27 @@ public class ConfElements {
 
     @Conf4j(value = "http://localhost",//
     description = "the base url for devoxx website", //
+    scope = { webapp, unit_test },//
     devPurposeOnly = true)
     public static String devoxx_base_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Accueil",//
-    description = "the Accueil url for devoxx website")
+    description = "the Accueil url for devoxx website",//
+    scope = { webapp, unit_test })
     public static String devoxx_home_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Agenda",//
-    description = "the Agenda url for devoxx website")
+    description = "the Agenda url for devoxx website", //
+    scope = { webapp, unit_test })
     public static String devoxx_agenda_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/UnitTest",//
-    usage = unit_test,//
+    scope = unit_test,//
     description = "the UnitTest url for devoxx website")
     public static String devoxx_unittest_url;
 
     @Conf4j(value = "${devoxx_base_url}/display/FR12/Unused",//
-    usage = webapp,//
+    scope = webapp,//
     description = "the Unused url for devoxx website")
     public static String devoxx_unused_url;
 }

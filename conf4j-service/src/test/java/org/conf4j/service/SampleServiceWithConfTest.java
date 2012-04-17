@@ -14,21 +14,11 @@ public class SampleServiceWithConfTest {
 
     @Test
     public void testDevoxxHome_localhost() {
-        assertNotSame("http://localhost/display/FR12/Accueil", svc.getDevoxxHome());
-    }
-
-    @Test
-    public void testDevoxxAgenda_localhost() {
-        assertNotSame("http://localhost/display/FR12/Agenda", svc.getDevoxxAgenda());
+        assertFalse("http://localhost/display/FR12/Accueil".equals(svc.getDevoxxHome()));
     }
 
     @Test
     public void testDevoxxHome_test_devoxx_fr() {
         assertEquals("http://test.devoxx.fr/display/FR12/Accueil", svc.getDevoxxHome());
-    }
-
-    @Test
-    public void testDevoxxAgenda_test_devoxx_fr() {
-        assertEquals("http://test.devoxx.fr/display/FR12/Agenda", svc.getDevoxxAgenda());
     }
 }

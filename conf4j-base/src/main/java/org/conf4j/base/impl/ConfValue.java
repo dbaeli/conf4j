@@ -15,14 +15,14 @@ package org.conf4j.base.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.conf4j.base.dsl.EUsage;
+import org.conf4j.base.dsl.EScope;
 
 public final class ConfValue {
     private String value;
     private String expandedValue;
     private final ESource source;
     private final String description;
-    private final List<EUsage> usages;
+    private final List<EScope> usages;
     private final boolean devPurposeOnly;
     private int accessCount = 0;
 
@@ -31,14 +31,14 @@ public final class ConfValue {
     }
 
     public ConfValue(ESource source) {
-        this(null, source, null, Arrays.asList(new EUsage[] { EUsage.undefined }), false);
+        this(null, source, null, Arrays.asList(new EScope[] { EScope.undefined }), false);
     }
 
     public ConfValue(String value, ESource source) {
-        this(value, source, null, Arrays.asList(new EUsage[] { EUsage.undefined }), false);
+        this(value, source, null, Arrays.asList(new EScope[] { EScope.undefined }), false);
     }
 
-    public ConfValue(String value, ESource source, String description, List<EUsage> usages, boolean devPurposeOnly) {
+    public ConfValue(String value, ESource source, String description, List<EScope> usages, boolean devPurposeOnly) {
         this.value = value;
         this.source = source;
         this.description = description;
@@ -83,7 +83,7 @@ public final class ConfValue {
         return !value.equals(expandedValue);
     }
 
-    public List<EUsage> getUsages() {
+    public List<EScope> getUsages() {
         return usages;
     }
 
