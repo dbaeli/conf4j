@@ -46,7 +46,7 @@ public class ConfElements {
     public static String config_dump;
 
     @Conf4j(value = "false", //
-    description = "System.out dump at startup for each variables (systeme/jvm/ConfElements)")
+    description = "System.out dump at startup for each variables (system/jvm/ConfElements)")
     public static String full_config_dump;
 
     static {
