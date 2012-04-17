@@ -150,9 +150,9 @@ public enum ConfServiceImpl implements ConfService {
     }
 
     @Override
-    public void checkUsage(PrintStream os) throws IOException {
+    public void checkScope(PrintStream os) throws IOException {
         for (Map.Entry<String, ConfValue> entry : conf.entrySet()) {
-            conf.checkUsage(entry.getValue(), entry.getKey(), os);
+            conf.checkScope(entry.getValue(), entry.getKey(), os);
         }
     }
 

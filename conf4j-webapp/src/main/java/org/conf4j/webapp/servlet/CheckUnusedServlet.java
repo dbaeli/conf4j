@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/usage", name = "UsageServlet")
-public class UsageServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/unused", name = "CheckUnusedServlet")
+public class CheckUnusedServlet extends HttpServlet {
     private static final long serialVersionUID = 4887084502608183969L;
 
     @Override
@@ -23,11 +23,11 @@ public class UsageServlet extends HttpServlet {
         final ServletOutputStream os = resp.getOutputStream();
         try {
             final PrintStream ps = new PrintStream(os);
-            ps.println("----------------------------------------------------------------------------------------");
-            ps.println("------------------------------------- check-usage --------------------------------------");
-            ps.println("----------------------------------------------------------------------------------------");
-            CONF.checkUsage(ps);
-            ps.println("----------------------------------------------------------------------------------------");
+            ps.println("------------------------------------------------------------------------------------------");
+            ps.println("-------------------------------------- CHECK UNUSED --------------------------------------");
+            ps.println("------------------------------------------------------------------------------------------");
+            CONF.checkUnused(ps);
+            ps.println("------------------------------------------------------------------------------------------");
         } finally {
             os.close();
         }

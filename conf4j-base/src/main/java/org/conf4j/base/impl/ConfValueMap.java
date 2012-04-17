@@ -29,37 +29,37 @@ import org.conf4j.base.impl.ConfValue.ESource;
 
 public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
     private static final long serialVersionUID = 1L;
-    private MessageFormat USAGE_0_INVALID_FOR_ELT_1 = new MessageFormat(
-                    "usage ''{0}'' is not a valid for config element ''{1}''");
-    private MessageFormat USAGE_0_NOT_FOUND_FOR_ELT_1_SOURCE_2 = new MessageFormat(
-                    "usage ''{0}'' not found for config element ''{1}'' and source ''{2}''");
-    private MessageFormat USAGE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1 = new MessageFormat(
-                    "usage ''{0}'' seems to be unused for usage ''{1}''");
-    static final List<EScope> UNDEFINED_USAGE = Arrays.asList(new EScope[] { EScope.undefined });
+    private static MessageFormat SCOPE_0_NOT_DECLARED_FOR_ELT_1 = new MessageFormat(
+                    "scope ''{0}'' not declared for ConfElement#{1}");
+    private static MessageFormat SCOPE_0_NOT_DECLARED_FOR_ELT_1_SOURCE_2 = new MessageFormat(
+                    "scope ''{0}'' not declared for ConfElement#{1} and source ''{2}''");
+    private static MessageFormat SCOPE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1 = new MessageFormat(
+                    "scope ''{0}'' seems to be unused for scope ''{1}''");
+    private static final List<EScope> SCOPE_UNDEFINED = Arrays.asList(new EScope[] { EScope.undefined });
 
     public ConfValue put(String name, String value, ESource source) {
         final ConfValue configValue = get(name);
         final String description = configValue == null ? "" : configValue.getDescription();
-        final List<EScope> usages = configValue == null ? UNDEFINED_USAGE : configValue.getUsages();
+        final List<EScope> usages = configValue == null ? SCOPE_UNDEFINED : configValue.getScopes();
         final boolean devPurposeOnly = configValue == null ? false : configValue.isDevPurposeOnly();
         return put(name, new ConfValue(value, source, description, usages, devPurposeOnly));
     }
 
-    public final void checkUsage(ConfValue value, String name, PrintStream os) throws IOException {
-        final ConfValue appname = super.get(ConfElements.scope);
-        final EScope usage = appname == null ? undefined : EScope.valueOf(appname.getValue(false));
+    public final void checkScope(ConfValue value, String name, PrintStream os) throws IOException {
+        final ConfValue scopeValue = super.get(ConfElements.scope);
+        final EScope scope = scopeValue == null ? undefined : EScope.valueOf(scopeValue.getValue(false));
         if (value == null)
             return;
-        if (usage == null) {
-            os.println(USAGE_0_INVALID_FOR_ELT_1.format(new Object[] { usage, name }));
+        if (scope == null) {
+            os.println(SCOPE_0_NOT_DECLARED_FOR_ELT_1.format(new Object[] { scope, name }));
             return;
         }
-        if (value.getUsages().size() == 0)
+        if (value.getScopes().size() == 0)
             return;
-        if (value.getUsages().size() == 1 && value.getUsages().contains(undefined))
+        if (value.getScopes().size() == 1 && value.getScopes().contains(undefined))
             return;
-        if (!value.getUsages().contains(usage) && value.getAccessCount() > 0) {
-            os.println(USAGE_0_NOT_FOUND_FOR_ELT_1_SOURCE_2.format(new Object[] { usage, name, value.getSource() }));
+        if (!value.getScopes().contains(scope) && value.getAccessCount() > 0) {
+            os.println(SCOPE_0_NOT_DECLARED_FOR_ELT_1_SOURCE_2.format(new Object[] { scope, name, value.getSource() }));
             return;
         }
     }
@@ -75,10 +75,10 @@ public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
             return;
 
         for (Map.Entry<String, ConfValue> entry : entrySet()) {
-            if (!entry.getValue().getUsages().contains(usage))
+            if (!entry.getValue().getScopes().contains(usage))
                 continue;
             if (entry.getValue().getAccessCount() == 0)
-                os.println(USAGE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1.format(new Object[] { entry.getKey(), usage }));
+                os.println(SCOPE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1.format(new Object[] { entry.getKey(), usage }));
         }
     }
 }

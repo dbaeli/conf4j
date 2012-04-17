@@ -27,7 +27,7 @@ public class IndexServlet extends HttpServlet {
         out.append("</head>");
         out.append("<body>");
         
-        out.append("<a href=\"dump\">dump</a> | <a href=\"fulldump\">fulldump</a> | <a href=\"usage\">usage</a> | <a href=\"unused\">unused</a>");
+        out.append("<a href=\"dump\">dump</a> | <a href=\"fulldump\">fulldump</a> | <a href=\"scope\">check scope</a> | <a href=\"unused\">check unused</a>");
         out.append("<hr>");
 
         out.append("<a href=\"");

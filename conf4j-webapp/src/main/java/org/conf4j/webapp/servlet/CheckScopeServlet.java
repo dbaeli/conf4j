@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(urlPatterns = "/unused", name = "UnusedServlet")
-public class UnusedServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/scope", name = "CheckScopeServlet")
+public class CheckScopeServlet extends HttpServlet {
     private static final long serialVersionUID = 4887084502608183969L;
 
     @Override
@@ -23,11 +23,11 @@ public class UnusedServlet extends HttpServlet {
         final ServletOutputStream os = resp.getOutputStream();
         try {
             final PrintStream ps = new PrintStream(os);
-            ps.println("------------------------------------------------------------------------------------------");
-            ps.println("-------------------------------------- check-unused --------------------------------------");
-            ps.println("------------------------------------------------------------------------------------------");
-            CONF.checkUnused(ps);
-            ps.println("------------------------------------------------------------------------------------------");
+            ps.println("----------------------------------------------------------------------------------------");
+            ps.println("------------------------------------- CHECK SCOPE --------------------------------------");
+            ps.println("----------------------------------------------------------------------------------------");
+            CONF.checkScope(ps);
+            ps.println("----------------------------------------------------------------------------------------");
         } finally {
             os.close();
         }

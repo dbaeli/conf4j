@@ -31,7 +31,7 @@ public interface ConfService {
 
     void dumpConf(PrintStream os, boolean filter);
 
-    void checkUsage(PrintStream os) throws IOException;
+    void checkScope(PrintStream os) throws IOException;
 
     void checkUnused(PrintStream os) throws IOException;
 

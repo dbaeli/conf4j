@@ -22,7 +22,7 @@ public final class ConfValue {
     private String expandedValue;
     private final ESource source;
     private final String description;
-    private final List<EScope> usages;
+    private final List<EScope> scopes;
     private final boolean devPurposeOnly;
     private int accessCount = 0;
 
@@ -38,11 +38,11 @@ public final class ConfValue {
         this(value, source, null, Arrays.asList(new EScope[] { EScope.undefined }), false);
     }
 
-    public ConfValue(String value, ESource source, String description, List<EScope> usages, boolean devPurposeOnly) {
+    public ConfValue(String value, ESource source, String description, List<EScope> scopes, boolean devPurposeOnly) {
         this.value = value;
         this.source = source;
         this.description = description;
-        this.usages = usages;
+        this.scopes = scopes;
         this.devPurposeOnly = devPurposeOnly;
     }
 
@@ -83,8 +83,8 @@ public final class ConfValue {
         return !value.equals(expandedValue);
     }
 
-    public List<EScope> getUsages() {
-        return usages;
+    public List<EScope> getScopes() {
+        return scopes;
     }
 
     public boolean isDevPurposeOnly() {

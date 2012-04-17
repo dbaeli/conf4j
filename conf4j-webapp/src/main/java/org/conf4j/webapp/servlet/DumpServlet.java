@@ -24,7 +24,7 @@ public class DumpServlet extends HttpServlet {
         try {
             final PrintStream ps = new PrintStream(os);
             ps.println("------------------------------------------------------------------");
-            ps.println("----------------------- dump-configuration -----------------------");
+            ps.println("----------------------- CONFIGURATION DUMP -----------------------");
             ps.println("------------------------------------------------------------------");
             CONF.dumpConf(ps, true);
             ps.println("------------------------------------------------------------------");
