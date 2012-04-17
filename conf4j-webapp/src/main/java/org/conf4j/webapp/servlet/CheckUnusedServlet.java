@@ -24,11 +24,7 @@ public class CheckUnusedServlet extends HttpServlet {
         try {
             final PrintStream ps = new PrintStream(os);
             ps.println("------------------------------------------------------------------------------------------");
-<<<<<<< HEAD:conf4j-webapp/src/main/java/org/conf4j/webapp/servlet/CheckUnusedServlet.java
             ps.println("-------------------------------------- CHECK UNUSED --------------------------------------");
-=======
-            ps.println("-------------------------------------- check-unused --------------------------------------");
->>>>>>> 95db5004d2fc805239122db650479189bb1647b1:conf4j-webapp/src/main/java/org/conf4j/webapp/servlet/UnusedServlet.java
             ps.println("------------------------------------------------------------------------------------------");
             CONF.checkUnused(ps);
             ps.println("------------------------------------------------------------------------------------------");
