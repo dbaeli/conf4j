@@ -1,0 +1,119 @@
+* Lancer eclipse avec tous les projets
+
+* Ouvrir la class ConfElement
+
+* Chercher les références de
+ devoxx_base_url
+ devoxx_home_url -> SampleServiceWithConf
+ devoxx_agenda_url
+ devoxx_unittest_url -> SampleServiceWithConf
+
+* Ouvrir la class SampleServiceWithConf
+
+* Checher les référence de getDevoxxUnitTest()
+  -> ouvrir la classe SampleServiceWithConfTest
+
+* Exécuter les tests
+  -> Failed
+
+* Ajouter -Ddevoxx_base_url=http://test.devoxx.fr au VM argument
+  -> Success
+
+* Ouvrir le pom.xml du projet 'conf4j-service'
+  -> monter la configuration du plugin 'maven-surefire-plugin'
+
+* Executer 'mvn clean install'
+  -> Sucess
+
+* Editer la valeur de 'devoxx_base_url' dans le pom.xml du projet 'conf4j-service'
+  -> Failed
+
+* Deployer conf4j-webapp\target\conf4j-webapp.war dans un tomcat vierge
+
+* Demarrer le tomcat
+
+  ******************************************************************
+  *
+  *  Conf4jContextListener#contextInitialized [starting    ...]
+  *
+  *  Conf4jContextListener#contextInitialized [succeed]
+  *
+  ******************************************************************
+
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/'
+  -> on voit les deux url 'http://localhost/display/FR12/Accueil' et 'http://localhost/display/FR12/UnitTest'
+
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/dump'
+  -> comparer avec les valeurs dans la classe 'ConfElements'
+
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/fulldump'
+  -> rechercher 'java.io.tmpdir'
+
+* Copier le fichier 'conf4j-webapp\target\conf4j_webapp.properties' dans 'apache-tomcat-7.0.27\conf\conf4j.properties'
+  -> éditer ce fichier 'config_dump=true' & 'devoxx_base_url=http://www.devoxx.fr'
+
+* Demarrer le tomcat
+
+  ******************************************************************************************
+  *
+  *  Conf4jContextListener#contextInitialized [starting    ...]
+  *
+  ******************************************************************************************
+  ## [CONFIG_FILE] System.out dump at startup for each variables declared as ConfElements
+  ## expanded to 'true'
+  ## access count 1
+  config_dump=true
+
+  (...)
+
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/unused' sans ouvrir 'http://localhost:8080/conf4j-webapp/'
+  ------------------------------------------------------------------------------------------
+  -------------------------------------- CHECK UNUSED --------------------------------------
+  ------------------------------------------------------------------------------------------
+  scope 'devoxx_home_url' seems to be unused for scope 'webapp'
+  scope 'devoxx_base_url' seems to be unused for scope 'webapp'
+  scope 'devoxx_agenda_url' seems to be unused for scope 'webapp'
+  ------------------------------------------------------------------------------------------
+  
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp/scope' sans ouvrir 'http://localhost:8080/conf4j-webapp/'
+  ----------------------------------------------------------------------------------------
+  ------------------------------------- CHECK SCOPE --------------------------------------
+  ----------------------------------------------------------------------------------------
+  ----------------------------------------------------------------------------------------
+
+* Ouvrir l'url 'http://localhost:8080/conf4j-webapp' puis réouvrir 'http://localhost:8080/conf4j-webapp/unused'
+  ------------------------------------------------------------------------------------------
+  -------------------------------------- CHECK UNUSED --------------------------------------
+  ------------------------------------------------------------------------------------------
+  scope 'devoxx_agenda_url' seems to be unused for scope 'webapp'
+  ------------------------------------------------------------------------------------------
+  
+* réouvrir 'http://localhost:8080/conf4j-webapp/scope'
+  ----------------------------------------------------------------------------------------
+  ------------------------------------- CHECK SCOPE --------------------------------------
+  ----------------------------------------------------------------------------------------
+  scope 'webapp' not declared for ConfElement#devoxx_unittest_url and source 'DEFAULT'
+  ----------------------------------------------------------------------------------------
+
+* Arreter le tomcat et editer 'apache-tomcat-7.0.27\conf\conf4j.properties'
+  -> renommer 'devoxx_base_url' en 'devoxx_base'
+
+* Demarrer le tomcat
+  ****************************************************************************************************************
+  *
+  *  Conf4jContextListener#contextInitialized [starting    ...]
+  *
+  ****************************************************************************************************************
+  ****************************************************************************************************************
+  *
+  *  Conf4jContextListener#contextInitialized [failed]
+  *
+  *  org.conf4j.base.exception.ConfException: Variable 'devoxx_base' is not declared as ConfElements#devoxx_base
+  *
+  ****************************************************************************************************************
+
+
+
+
+
+
