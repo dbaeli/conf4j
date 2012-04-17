@@ -1,8 +1,10 @@
 package org.conf4j.service;
 
+import static org.conf4j.base.impl.ConfServiceImpl.CONF;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -12,6 +14,12 @@ import org.junit.Test;
  */
 public class SampleServiceWithConfTest {
     private final SampleServiceWithConf svc = new SampleServiceWithConf();
+    
+    @BeforeClass
+    public static void dumpConf() {
+        CONF.dumpConf(System.out, true);
+    }
+    
 
     @Test
     public void testDevoxxUnitTest_localhost() {
