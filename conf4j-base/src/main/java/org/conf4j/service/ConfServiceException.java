@@ -19,7 +19,7 @@
 package org.conf4j.service;
 
 @SuppressWarnings("serial")
-public class ConfServiceException extends Exception {
+class ConfServiceException extends Exception {
     public ConfServiceException(String message, Throwable t) {
         super(message, t);
     }
