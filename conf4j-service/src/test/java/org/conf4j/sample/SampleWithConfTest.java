@@ -1,9 +1,10 @@
-package org.conf4j.service;
+package org.conf4j.sample;
 
 import static org.conf4j.service.ConfServiceInstance.CONF;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 
+import org.conf4j.sample.SampleWithConf;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -12,8 +13,8 @@ import org.junit.Test;
  * 
  * in maven it's define as system property for the surefire plugin
  */
-public class SampleServiceWithConfTest {
-    private final SampleServiceWithConf svc = new SampleServiceWithConf();
+public class SampleWithConfTest {
+    private final SampleWithConf svc = new SampleWithConf();
     
     @BeforeClass
     public static void dumpConf() {
