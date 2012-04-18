@@ -1,6 +1,6 @@
 package org.conf4j.service;
 
-import static org.conf4j.base.impl.ConfServiceImpl.CONF;
+import static org.conf4j.service.ConfServiceInstance.CONF;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 

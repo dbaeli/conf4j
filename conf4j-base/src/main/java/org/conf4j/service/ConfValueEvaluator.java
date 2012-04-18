@@ -10,20 +10,20 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base.impl;
+package org.conf4j.service;
 
 import java.util.Map;
 
-import org.conf4j.base.macro.Evaluator;
+import org.conf4j.util.MacroEvaluator;
 
-public final class ConfEvaluator implements Evaluator {
+final class ConfValueEvaluator implements MacroEvaluator {
     private final boolean countAccess;
 
-    public ConfEvaluator() {
+    public ConfValueEvaluator() {
         this(true);
     }
 
-    public ConfEvaluator(boolean countAccess) {
+    public ConfValueEvaluator(boolean countAccess) {
         this.countAccess = countAccess;
     }
 

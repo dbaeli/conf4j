@@ -10,10 +10,10 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base.impl;
+package org.conf4j.service;
 
-import static org.conf4j.base.dsl.EScope.undefined;
-import static org.conf4j.base.dsl.EScope.unit_test;
+import static org.conf4j.EScope.undefined;
+import static org.conf4j.EScope.unit_test;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -23,11 +23,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.conf4j.base.ConfElements;
-import org.conf4j.base.dsl.EScope;
-import org.conf4j.base.impl.ConfValue.ESource;
+import org.conf4j.ConfElements;
+import org.conf4j.EScope;
+import org.conf4j.service.ConfValue.ESource;
 
-public final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
+final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
     private static final long serialVersionUID = 1L;
     private static MessageFormat SCOPE_0_NOT_DECLARED_FOR_ELT_1 = new MessageFormat(
                     "scope ''{0}'' not declared for ConfElement#{1}");

@@ -1,6 +1,6 @@
 package org.conf4j.webapp.servlet;
 
-import static org.conf4j.base.impl.ConfServiceImpl.CONF;
+import static org.conf4j.service.ConfServiceInstance.CONF;
 
 import java.io.IOException;
 import java.io.PrintStream;

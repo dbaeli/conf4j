@@ -12,7 +12,7 @@
  */
 package org.conf4j.maven;
 
-import static org.conf4j.base.dsl.EScope.undefined;
+import static org.conf4j.EScope.undefined;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -27,9 +27,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
-import org.conf4j.base.ConfElements;
-import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EScope;
+import org.conf4j.Conf4j;
+import org.conf4j.ConfElements;
+import org.conf4j.EScope;
 
 /**
  * @goal generate

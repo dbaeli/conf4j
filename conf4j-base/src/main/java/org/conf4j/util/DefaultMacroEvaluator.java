@@ -16,15 +16,15 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.macro;
+package org.conf4j.util;
 
 import java.util.Map;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
-public class DefaultEvaluator implements Evaluator {
-    private static final Logger LOG = Logger.getLogger(DefaultEvaluator.class.getName());
+public class DefaultMacroEvaluator implements MacroEvaluator {
+    private static final Logger LOG = Logger.getLogger(DefaultMacroEvaluator.class.getName());
 
     @Override
     public String eval(Map<String, ?> conf, String key, String replacement, boolean encodeHTML) {

@@ -10,15 +10,13 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base;
+package org.conf4j;
 
-import static org.conf4j.base.dsl.EScope.unit_test;
-import static org.conf4j.base.dsl.EScope.webapp;
+import static org.conf4j.EScope.unit_test;
+import static org.conf4j.EScope.webapp;
 
 import java.lang.reflect.Field;
 
-import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.dsl.EScope;
 
 public class ConfElements {
 

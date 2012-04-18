@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.macro;
+package org.conf4j.util;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -24,7 +24,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.conf4j.base.exception.ParsingException;
 
 /**
  * Substitution récursive de variables ${...} dans un template (à la script Ant).
@@ -38,22 +37,22 @@ public class MacroProcessor {
     private static final String STR_SYNTAX_ERROR_IN_0 = "Syntax error in property: ''{0}''";
     private static final MessageFormat MORE_THAN_0_LEVEL_TO_EXPAND_1 = new MessageFormat(
                     STR_MORE_THAN_0_LEVEL_TO_EXPAND_1);
-    private static final Evaluator DEFAULT_STRING_EVAL = new DefaultEvaluator();
+    private static final MacroEvaluator DEFAULT_STRING_EVAL = new DefaultMacroEvaluator();
 
     public static String replaceProperties(String value, Map<String, ?> conf, String defaultReplacement)
-                    throws ParsingException {
+                    throws MacroParsingException {
         return replacePropertiesRec(value, conf, new ArrayList<String>(), new ArrayList<String>(), 0, false,
                         defaultReplacement);
     }
 
     public static String replaceProperties(String value, Map<String, ?> conf, String defaultReplacement,
-                    Evaluator evaluator) throws ParsingException {
+                    MacroEvaluator evaluator) throws MacroParsingException {
         return replacePropertiesRec(value, conf, new ArrayList<String>(), new ArrayList<String>(), 0, false,
                         defaultReplacement, evaluator);
     }
 
     public static String replaceProperties(String value, Map<String, ?> conf, int depth)
-                    throws ParsingException {
+                    throws MacroParsingException {
         return replacePropertiesRec(value, conf, new ArrayList<String>(), new ArrayList<String>(), depth, false, null,
                         DEFAULT_STRING_EVAL);
     }
@@ -71,18 +70,18 @@ public class MacroProcessor {
      * @param encodeHTML
      * @param defaultReplacement
      * @return macro-expanded value.
-     * @throws ParsingException if recursivity goes beyond {@value MacroProcessor#MAX_DEPTH} limit.
+     * @throws MacroParsingException if recursivity goes beyond {@value MacroProcessor#MAX_DEPTH} limit.
      */
     public static final String replacePropertiesRec(String value, Map<String, ?> conf, List<String> fragments,
                     List<String> propertyRefs, int depth, boolean encodeHTML, String defaultReplacement)
-                    throws ParsingException {
+                    throws MacroParsingException {
         return replacePropertiesRec(value, conf, fragments, propertyRefs, depth, encodeHTML, defaultReplacement,
                         DEFAULT_STRING_EVAL);
     }
 
     private static final String replacePropertiesRec(String value, Map<String, ?> conf, List<String> fragments,
                     List<String> propertyRefs, int depth, boolean encodeHTML, String defaultReplacement,
-                    Evaluator evaluator) throws ParsingException {
+                    MacroEvaluator evaluator) throws MacroParsingException {
         parsePropertyString(value, fragments, propertyRefs);
         final StringBuilder unkownParam = new StringBuilder();
         final StringBuilder sb = new StringBuilder();
@@ -108,7 +107,7 @@ public class MacroProcessor {
             return replacePropertiesRec(expandedValue, conf, fragments, propertyRefs, depth + 1, encodeHTML, null,
                             evaluator);
         } else if (containProperty && depth > MAX_DEPTH)
-            throw new ParsingException(MORE_THAN_0_LEVEL_TO_EXPAND_1.format(new Object[] { MAX_DEPTH,
+            throw new MacroParsingException(MORE_THAN_0_LEVEL_TO_EXPAND_1.format(new Object[] { MAX_DEPTH,
                             expandedValue }));
         else
             return expandedValue;
@@ -126,11 +125,11 @@ public class MacroProcessor {
      * @param fragments List to add text fragments to. Must not be <code>null</code>.
      * @param propertyRefs List to add property names to. Must not be <code>null</code>.
      * 
-     * @exception ParsingException if the string contains an opening <code>${</code> without a closing
+     * @exception MacroParsingException if the string contains an opening <code>${</code> without a closing
      *                <code>}</code>
      */
     private static final void parsePropertyString(String textToParse, List<String> fragments, List<String> propertyRefs)
-                    throws ParsingException {
+                    throws MacroParsingException {
         final MessageFormat SYNTAX_ERROR_IN_0 = new MessageFormat(STR_SYNTAX_ERROR_IN_0);
         int prev = 0;
         int pos;
@@ -169,7 +168,7 @@ public class MacroProcessor {
                 // property found, extract its name or bail on a typo
                 final int endName = textToParse.indexOf('}', pos);
                 if (endName < 0)
-                    throw new ParsingException(SYNTAX_ERROR_IN_0.format(new String[] { textToParse }));
+                    throw new MacroParsingException(SYNTAX_ERROR_IN_0.format(new String[] { textToParse }));
                 String propertyName = textToParse.substring(pos + 2, endName);
                 fragments.add(null);
                 propertyRefs.add(propertyName);

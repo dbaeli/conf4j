@@ -10,17 +10,17 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base.impl;
+package org.conf4j.service;
 
-import static org.conf4j.base.ConfElements.isConfigElement;
-import static org.conf4j.base.ConfElements.configuration_file;
-import static org.conf4j.base.ConfElements.instance_configuration_file;
-import static org.conf4j.base.impl.ConfValue.ESource.CONFIG_FILE;
-import static org.conf4j.base.impl.ConfValue.ESource.CUSTOM;
-import static org.conf4j.base.impl.ConfValue.ESource.DEFAULT;
-import static org.conf4j.base.impl.ConfValue.ESource.INSTANCE_FILE;
-import static org.conf4j.base.impl.ConfValue.ESource.JVM_PROPERTY;
-import static org.conf4j.base.impl.ConfValue.ESource.OS_PROPERTY;
+import static org.conf4j.ConfElements.configuration_file;
+import static org.conf4j.ConfElements.instance_configuration_file;
+import static org.conf4j.ConfElements.isConfigElement;
+import static org.conf4j.service.ConfValue.ESource.CONFIG_FILE;
+import static org.conf4j.service.ConfValue.ESource.CUSTOM;
+import static org.conf4j.service.ConfValue.ESource.DEFAULT;
+import static org.conf4j.service.ConfValue.ESource.INSTANCE_FILE;
+import static org.conf4j.service.ConfValue.ESource.JVM_PROPERTY;
+import static org.conf4j.service.ConfValue.ESource.OS_PROPERTY;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,16 +41,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang3.StringUtils;
-import org.conf4j.base.ConfElements;
-import org.conf4j.base.ConfService;
-import org.conf4j.base.dsl.Conf4j;
-import org.conf4j.base.exception.ConfException;
-import org.conf4j.base.exception.ParsingException;
-import org.conf4j.base.impl.ConfValue.ESource;
-import org.conf4j.base.macro.Evaluator;
-import org.conf4j.base.macro.MacroProcessor;
+import org.conf4j.Conf4j;
+import org.conf4j.ConfElements;
+import org.conf4j.ConfService;
+import org.conf4j.service.ConfValue.ESource;
+import org.conf4j.util.MacroEvaluator;
+import org.conf4j.util.MacroProcessor;
+import org.conf4j.util.MacroParsingException;
 
-public enum ConfServiceImpl implements ConfService {
+public enum ConfServiceInstance implements ConfService {
     CONF;
 
     private static final String LOGGER_CAT = "conf4j.console";
@@ -69,11 +68,11 @@ public enum ConfServiceImpl implements ConfService {
                     "## [{2}] {3}\n## expanded to ''{4}''\n## access count {5} \n{0}={1}\n");
     private static final MessageFormat VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER = new MessageFormat(
                     "Variable ''{0}'' is not declared as ConfElements#{0}");
-    private static final Evaluator EVALUATOR = new ConfEvaluator();
-    private static final Evaluator EVALUATOR_no_access_count = new ConfEvaluator(false);
+    private static final MacroEvaluator EVALUATOR = new ConfValueEvaluator();
+    private static final MacroEvaluator EVALUATOR_no_access_count = new ConfValueEvaluator(false);
 
     private transient ConfValueMap conf;
-    private transient ConfException initException;
+    private transient ConfServiceException initException;
 
     /**
      * @param key la valeur parse
@@ -130,7 +129,7 @@ public enum ConfServiceImpl implements ConfService {
         try {
             return MacroProcessor.replaceProperties(value, conf, value, countAccess ? EVALUATOR
                             : EVALUATOR_no_access_count);
-        } catch (ParsingException e) {
+        } catch (MacroParsingException e) {
             throw new RuntimeException(value, e);
         }
     }
@@ -226,12 +225,12 @@ public enum ConfServiceImpl implements ConfService {
     private final void ensureInitialized() {
         try {
             initConf();
-        } catch (ConfException e) {
+        } catch (ConfServiceException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private final synchronized void initConf() throws ConfException {
+    private final synchronized void initConf() throws ConfServiceException {
         if (conf != null) {
             if (initException != null)
                 throw initException;
@@ -245,12 +244,12 @@ public enum ConfServiceImpl implements ConfService {
             initPublicFile(conf);
             initInstanceFile(conf);
         } catch (Throwable t) {
-            initException = t instanceof ConfException ? (ConfException) t : new ConfException(t);
+            initException = t instanceof ConfServiceException ? (ConfServiceException) t : new ConfServiceException(t);
             throw initException;
         }
     }
 
-    private static final void initDefault(ConfValueMap conf) throws ConfException {
+    private static final void initDefault(ConfValueMap conf) throws ConfServiceException {
         for (Field field : ConfElements.class.getDeclaredFields()) {
             final Conf4j annotation = field.getAnnotation(Conf4j.class);
             if (annotation == null)
@@ -290,23 +289,23 @@ public enum ConfServiceImpl implements ConfService {
      * contains parameters B,C,D... that could be part of the parameter A definition. This being inconsistent, the
      * solution chosen is NOT to macro-expand 'configuration_file' value.
      */
-    private static final void initPublicFile(ConfValueMap conf) throws ConfException {
+    private static final void initPublicFile(ConfValueMap conf) throws ConfServiceException {
         final ConfValue filePath = conf.get(configuration_file);
         initFile(CONFIG_FILE, conf, configuration_file, filePath);
     }
 
-    private static final void initInstanceFile(ConfValueMap conf) throws ConfException {
+    private static final void initInstanceFile(ConfValueMap conf) throws ConfServiceException {
         final ConfValue filePath = conf.get(instance_configuration_file);
         initFile(INSTANCE_FILE, conf, instance_configuration_file, filePath);
     }
 
     private static final void initFile(ESource source, ConfValueMap conf, String settingKey, ConfValue filePath)
-                    throws ConfException {
+                    throws ConfServiceException {
         if (filePath == null)
             return;
         final Properties properties = new Properties();
         try {
-            final ConfEvaluator evaluator = new ConfEvaluator(false);
+            final ConfValueEvaluator evaluator = new ConfValueEvaluator(false);
             final InputStream is = new FileInputStream(MacroProcessor.replaceProperties(filePath.getValue(false), conf,
                             settingKey, evaluator));
             try {
@@ -316,8 +315,8 @@ public enum ConfServiceImpl implements ConfService {
             }
         } catch (IOException e) {
             // do nothing
-        } catch (ParsingException e) {
-            throw new ConfException(e.getMessage(), e);
+        } catch (MacroParsingException e) {
+            throw new ConfServiceException(e.getMessage(), e);
         }
         final Enumeration<?> e = properties.keys();
         while (e.hasMoreElements()) {
@@ -325,7 +324,7 @@ public enum ConfServiceImpl implements ConfService {
             final String value = properties.getProperty(name);
             name = normalise(name, source, value);
             if (!isConfigElement(name))
-                throw new ConfException(VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER.format(new String[] { name }));
+                throw new ConfServiceException(VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER.format(new String[] { name }));
             conf.put(name, value, source);
         }
     }
