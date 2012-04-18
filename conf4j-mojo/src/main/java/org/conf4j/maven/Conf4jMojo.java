@@ -3,9 +3,9 @@
  * file distributed with this work for additional information regarding copyright ownership. The ASF licenses this file
  * to you under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
  * License. You may obtain a copy of the License at
- *
+ * 
  * http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
  * Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
@@ -38,7 +38,6 @@ import org.conf4j.EScope;
  */
 public final class Conf4jMojo extends AbstractMojo {
     private static final MessageFormat VARIABLE_0_VALUE_1_DESCRIPTION_2 = new MessageFormat("## {2}\n{0}={1}\n");
-    private static final MessageFormat conf4j_0_dot_properties = new MessageFormat("conf4j_{0}.properties");
     /**
      * @parameter expression="${project.build.directory}"
      * @required
@@ -49,7 +48,7 @@ public final class Conf4jMojo extends AbstractMojo {
      * @parameter expression="undefined"
      * @required
      */
-    private String usage;
+    private String scope;
 
     public void execute() throws MojoExecutionException, MojoFailureException {
         if (!outputDirectory.exists())
@@ -57,9 +56,9 @@ public final class Conf4jMojo extends AbstractMojo {
         if (!outputDirectory.isDirectory())
             throw new MojoFailureException(outputDirectory + " is not a directory");
 
-        final EScope targetUsage;
+        final EScope targetScope;
         try {
-            targetUsage = EScope.valueOf(usage);
+            targetScope = EScope.valueOf(scope);
         } catch (IllegalArgumentException e) {
             throw new MojoFailureException(e.getMessage());
         }
@@ -75,11 +74,11 @@ public final class Conf4jMojo extends AbstractMojo {
             final boolean devPurposeOnly = annotation.devPurposeOnly();
             if (!devPurposeOnly)
                 continue;
-            if (!usages.contains(targetUsage) && !(usages.size() == 1 && usages.contains(undefined)))
+            if (!usages.contains(targetScope) && !(usages.size() == 1 && usages.contains(undefined)))
                 continue;
             buffer.append(VARIABLE_0_VALUE_1_DESCRIPTION_2.format(new Object[] { field.getName(), value, description }));
         }
-        final File file = new File(outputDirectory, conf4j_0_dot_properties.format(new Object[] { targetUsage }));
+        final File file = new File(outputDirectory, "conf4j.properties");
         try {
             IOUtils.write(buffer, new FileOutputStream(file));
         } catch (FileNotFoundException e) {
