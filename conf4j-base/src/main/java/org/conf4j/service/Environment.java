@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.impl;
+package org.conf4j.service;
 
 import java.io.BufferedReader;
 import java.io.InputStream;

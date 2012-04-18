@@ -14,30 +14,34 @@
   -> ouvrir la classe SampleServiceWithConfTest
 
 * Exécuter les tests
-  -> Failed
+  -> *Failed*
+  -> montrer la conf dans la console
 
-* Ajouter -Ddevoxx_base_url=http://test.devoxx.fr au VM argument
-  -> Success
+* Ajouter -Ddevoxx_base_url=http://test.devoxx.fr comme VM argument
+  -> *Success*
+  -> montrer la conf dans la console
 
 * Ajouter -Dconfiguration_file=c:/Users/gdu/Desktop/conf4j.properties
-  -> Creer un ficher conf4j.properties
+  -> Créer un ficher conf4j.properties
   -> Supprimer -Ddevoxx_base_url=http://test.devoxx.fr
   -> Relancer le test
-  -> Failed
+  -> *Failed*
+  -> montrer la conf dans la console
 
 * Editer c:/Users/gdu/Desktop/conf4j.properties
   -> ajouter devoxx_base_url=http://test.devoxx.fr
   -> Relancer le test
-  -> Success
+  -> *Success*
+  -> montrer la conf dans la console
 
 * Ouvrir le pom.xml du projet 'conf4j-service'
   -> monter la configuration du plugin 'maven-surefire-plugin'
 
 * Executer 'mvn clean install'
-  -> Sucess
+  -> *Sucess*
 
 * Editer la valeur de 'devoxx_base_url' dans le pom.xml du projet 'conf4j-service'
-  -> Failed
+  -> *Failed*
 
 * Deployer conf4j-webapp\target\conf4j.war dans un tomcat vierge
 
@@ -54,14 +58,19 @@
 * Ouvrir l'url 'http://localhost:8080/conf4j/'
   -> on voit les deux url 'http://localhost/display/FR12/Accueil' et 'http://localhost/display/FR12/UnitTest'
 
-* Ouvrir l'url 'http://localhost:8080/conf4j/dump'
+* Ouvrir l'url 'http://localhost:8080/conf4j/'
   -> comparer avec les valeurs dans la classe 'ConfElements'
+  -> faire des reloads de la page 'http://localhost:8080/conf4j/' dans un autre onglet
+  -> rafraichir 'http://localhost:8080/conf4j/'
+  -> observer le compteur d'instance qui augmente
 
 * Ouvrir l'url 'http://localhost:8080/conf4j/fulldump'
   -> rechercher 'java.io.tmpdir'
 
 * Copier le fichier 'conf4j\target\conf4j_webapp.properties' dans 'apache-tomcat-7.0.27\conf\conf4j.properties'
-  -> éditer ce fichier 'config_dump=true' & 'devoxx_base_url=http://www.devoxx.fr'
+  -> éditer ce fichier
+  -> 'config_dump=true'
+  -> 'devoxx_base_url=http://www.devoxx.fr'
 
 * Demarrer le tomcat
 

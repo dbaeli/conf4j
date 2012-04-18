@@ -10,30 +10,21 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base;
+package org.conf4j;
 
-import java.io.IOException;
-import java.io.PrintStream;
-import java.util.List;
+import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
 
-public interface ConfService {
-    String[] getMultiValues(String key);
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Conf4j {
+    String value();
 
-    List<String> getKeys();
+    EScope[] scope() default { EScope.undefined };
 
-    String getValue(String key);
+    String description() default "";
 
-    boolean getBooleanValue(String key);
-
-    int getIntegerValue(String key, int valueIfError);
-
-    String setValue(String key, String value);
-
-    void dumpConf(PrintStream os, boolean filter);
-
-    void checkScope(PrintStream os) throws IOException;
-
-    void checkUnused(PrintStream os) throws IOException;
-
-    void initFolders();
+    boolean devPurposeOnly() default false;
 }

@@ -16,19 +16,10 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.exception;
+package org.conf4j.util;
 
-@SuppressWarnings("serial")
-public class ConfException extends Exception {
-    public ConfException(String message, Throwable t) {
-        super(message, t);
-    }
+import java.util.Map;
 
-    public ConfException(String message) {
-        super(message);
-    }
-
-    public ConfException(Throwable t) {
-        super(t);
-    }
+public interface MacroEvaluator {
+    String eval(Map<String, ?> conf, String key, String defaultReplacement, boolean encodeHTML);
 }

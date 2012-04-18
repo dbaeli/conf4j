@@ -16,13 +16,19 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.exception;
+package org.conf4j.service;
 
-public class ParsingException extends Exception {
-    private static final long serialVersionUID = 8023170163059010010L;
+@SuppressWarnings("serial")
+public class ConfServiceException extends Exception {
+    public ConfServiceException(String message, Throwable t) {
+        super(message, t);
+    }
 
-    public ParsingException(String message) {
+    public ConfServiceException(String message) {
         super(message);
     }
 
+    public ConfServiceException(Throwable t) {
+        super(t);
+    }
 }

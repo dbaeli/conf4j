@@ -10,14 +10,14 @@
  * an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the
  * specific language governing permissions and limitations under the License.
  */
-package org.conf4j.base.impl;
+package org.conf4j.service;
 
 import java.util.Arrays;
 import java.util.List;
 
-import org.conf4j.base.dsl.EScope;
+import org.conf4j.EScope;
 
-public final class ConfValue {
+final class ConfValue {
     private String value;
     private String expandedValue;
     private final ESource source;
@@ -79,7 +79,7 @@ public final class ConfValue {
         if ((value == null) || (value.length() == 0))
             return false;
         if (expandedValue == null)
-            expandedValue = ConfServiceImpl.CONF.getValue(value);
+            expandedValue = ConfServiceInstance.CONF.getValue(value);
         return !value.equals(expandedValue);
     }
 

@@ -1,15 +1,15 @@
 package org.conf4j.webapp.listener;
 
-import static org.conf4j.base.ConfElements.scope;
-import static org.conf4j.base.ConfElements.config_dump;
-import static org.conf4j.base.ConfElements.full_config_dump;
-import static org.conf4j.base.impl.ConfServiceImpl.CONF;
+import static org.conf4j.ConfElements.config_dump;
+import static org.conf4j.ConfElements.full_config_dump;
+import static org.conf4j.ConfElements.scope;
+import static org.conf4j.service.ConfServiceInstance.CONF;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import javax.servlet.annotation.WebListener;
 
-import org.conf4j.base.dsl.EScope;
+import org.conf4j.EScope;
 
 @WebListener("Conf4jContextListener")
 public class Conf4jContextListener implements ServletContextListener {

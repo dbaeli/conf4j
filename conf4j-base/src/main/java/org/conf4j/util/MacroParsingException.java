@@ -16,10 +16,13 @@
  * specific language governing permissions and limitations
  * under the License.
  */
-package org.conf4j.base.macro;
+package org.conf4j.util;
 
-import java.util.Map;
+public class MacroParsingException extends Exception {
+    private static final long serialVersionUID = 8023170163059010010L;
 
-public interface Evaluator {
-    String eval(Map<String, ?> conf, String key, String defaultReplacement, boolean encodeHTML);
+    public MacroParsingException(String message) {
+        super(message);
+    }
+
 }
