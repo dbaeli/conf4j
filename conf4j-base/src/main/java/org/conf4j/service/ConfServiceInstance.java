@@ -13,12 +13,10 @@
 package org.conf4j.service;
 
 import static org.conf4j.ConfElements.configuration_file;
-import static org.conf4j.ConfElements.instance_configuration_file;
 import static org.conf4j.ConfElements.isConfigElement;
 import static org.conf4j.service.ConfValue.ESource.CONFIG_FILE;
 import static org.conf4j.service.ConfValue.ESource.CUSTOM;
 import static org.conf4j.service.ConfValue.ESource.DEFAULT;
-import static org.conf4j.service.ConfValue.ESource.INSTANCE_FILE;
 import static org.conf4j.service.ConfValue.ESource.JVM_PROPERTY;
 import static org.conf4j.service.ConfValue.ESource.OS_PROPERTY;
 
@@ -46,8 +44,8 @@ import org.conf4j.ConfElements;
 import org.conf4j.ConfService;
 import org.conf4j.service.ConfValue.ESource;
 import org.conf4j.util.MacroEvaluator;
-import org.conf4j.util.MacroProcessor;
 import org.conf4j.util.MacroParsingException;
+import org.conf4j.util.MacroProcessor;
 
 public enum ConfServiceInstance implements ConfService {
     CONF;
@@ -242,7 +240,6 @@ public enum ConfServiceInstance implements ConfService {
             initOS(conf);
             initJVM(conf);
             initPublicFile(conf);
-            initInstanceFile(conf);
         } catch (Throwable t) {
             initException = t instanceof ConfServiceException ? (ConfServiceException) t : new ConfServiceException(t);
             throw initException;
@@ -294,11 +291,6 @@ public enum ConfServiceInstance implements ConfService {
         initFile(CONFIG_FILE, conf, configuration_file, filePath);
     }
 
-    private static final void initInstanceFile(ConfValueMap conf) throws ConfServiceException {
-        final ConfValue filePath = conf.get(instance_configuration_file);
-        initFile(INSTANCE_FILE, conf, instance_configuration_file, filePath);
-    }
-
     private static final void initFile(ESource source, ConfValueMap conf, String settingKey, ConfValue filePath)
                     throws ConfServiceException {
         if (filePath == null)
@@ -324,7 +316,8 @@ public enum ConfServiceInstance implements ConfService {
             final String value = properties.getProperty(name);
             name = normalise(name, source, value);
             if (!isConfigElement(name))
-                throw new ConfServiceException(VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER.format(new String[] { name }));
+                throw new ConfServiceException(
+                                VARIABLE_0_NOT_DECLARED_AS_CONFELEMENTS_MEMBER.format(new String[] { name }));
             conf.put(name, value, source);
         }
     }

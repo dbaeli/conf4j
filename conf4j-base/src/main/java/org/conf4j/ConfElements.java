@@ -17,7 +17,6 @@ import static org.conf4j.EScope.webapp;
 
 import java.lang.reflect.Field;
 
-
 public class ConfElements {
 
     private ConfElements() {
@@ -26,10 +25,6 @@ public class ConfElements {
     @Conf4j(value = "${catalina.base}/conf/conf4j.properties", //
     description = "Conf4j property file to override configuration variables values")
     public static String configuration_file;
-
-    @Conf4j(value = "${catalina.base}/conf/instance_conf4j.properties", //
-    description = "Conf4j property file to override configuration variables values per instance")
-    public static String instance_configuration_file;
 
     /**
      * @see EScope
