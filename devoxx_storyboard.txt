@@ -4,14 +4,14 @@
 
 * Chercher les références de
  devoxx_base_url
- devoxx_home_url -> SampleServiceWithConf
+ devoxx_home_url -> SampleWithConf
  devoxx_agenda_url
- devoxx_unittest_url -> SampleServiceWithConf
+ devoxx_unittest_url -> SampleWithConf
 
-* Ouvrir la class SampleServiceWithConf
+* Ouvrir la class SampleWithConf
 
 * Checher les référence de getDevoxxUnitTest()
-  -> ouvrir la classe SampleServiceWithConfTest
+  -> ouvrir la classe SampleWithConfTest
 
 * Exécuter les tests
   -> *Failed*
