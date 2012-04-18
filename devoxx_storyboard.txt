@@ -126,12 +126,17 @@
 
 Todo:
 * dump plus clean (one shot)
-* cadrer l'introduction:
+* Cadrer l'introduction:
 ** Maitrise de la configuration (single point)
-** Pattern enum
+** Système ancestral de la configuration : OS (pas de rechargement à chaud)
 ** Cycle de chargement, et traçabilité du chargement
 ** Ceci n'est pas Spring, CDI, une librairie, une roue, ...
 ** Ceci est un pattern pour générer un point de concentration des paramètres vitaux de votre application
+** Implémentation pour facilité la vie du développeur : Pattern enum
+** Configuration Driven Low Design
+
+
+* Packages et Classes pour rendre compréhensible l'outillage
 
 
 
