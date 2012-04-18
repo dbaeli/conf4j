@@ -43,7 +43,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.conf4j</groupId>
-			<artifactId>conf4j-service</artifactId>
+			<artifactId>conf4j-sample</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>javax.servlet</groupId>

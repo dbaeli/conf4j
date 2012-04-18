@@ -15,16 +15,10 @@ import org.junit.Test;
  */
 public class SampleWithConfTest {
     private final SampleWithConf svc = new SampleWithConf();
-    
+
     @BeforeClass
     public static void dumpConf() {
         CONF.dumpConf(System.out, true);
-    }
-    
-
-    @Test
-    public void testDevoxxUnitTest_localhost() {
-        assertFalse("http://localhost/display/FR12/UnitTest".equals(svc.getDevoxxUnitTest()));
     }
 
     @Test
