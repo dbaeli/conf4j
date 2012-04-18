@@ -8,8 +8,8 @@
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.conf4j</groupId>
-	<artifactId>conf4j-service</artifactId>
-	<name>conf4j-service</name>
+	<artifactId>conf4j-sample</artifactId>
+	<name>conf4j-sample</name>
 	<dependencies>
 		<dependency>
 			<groupId>org.conf4j</groupId>

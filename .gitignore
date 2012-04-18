@@ -5,10 +5,10 @@ conf4j-config/target/*
 conf4j-integration/.classpath
 conf4j-integration/target/*
 conf4j-integration/.project
-conf4j-service/.classpath
-conf4j-service/.project
-conf4j-service/target/*
-conf4j-service/.settings
+conf4j-sample/.classpath
+conf4j-sample/.project
+conf4j-sample/target/*
+conf4j-sample/.settings
 conf4j-webapp/.classpath
 conf4j-webapp/.project
 conf4j-webapp/target/*

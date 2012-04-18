@@ -15,7 +15,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.conf4j</groupId>
-				<artifactId>conf4j-service</artifactId>
+				<artifactId>conf4j-sample</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 			<dependency>
@@ -62,7 +62,7 @@
 	</dependencyManagement>
 	<modules>
 		<module>conf4j-base</module>
-		<module>conf4j-service</module>
+		<module>conf4j-sample</module>
 		<module>conf4j-webapp</module>
 		<module>conf4j-mojo</module>
 	</modules>
