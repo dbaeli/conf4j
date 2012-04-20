@@ -65,6 +65,7 @@ class Environment {
                 cmd = new String[] { "cmd", "/c", "set" };
             } else if (osname.indexOf("linux") >= 0) {
             } else if (osname.indexOf("sunos") >= 0) {
+            } else if (osname.indexOf("mac os x") >= 0) {
             } else if (osname.indexOf("z/os") >= 0) {
                 enc = "Cp1047";
             } else {

@@ -34,7 +34,7 @@ final class ConfValueMap extends ConcurrentHashMap<String, ConfValue> {
     private static MessageFormat SCOPE_0_NOT_DECLARED_FOR_ELT_1_SOURCE_2 = new MessageFormat(
                     "scope ''{0}'' not declared for ConfElement#{1} and source ''{2}''");
     private static MessageFormat SCOPE_0_SEEMS_TO_BE_UNUSED_FOR_USAGE_1 = new MessageFormat(
-                    "scope ''{0}'' seems to be unused for scope ''{1}''");
+                    "''{0}'' seems to be unused ( scope ''{1}'' )");
     private static final List<EScope> SCOPE_UNDEFINED = Arrays.asList(new EScope[] { EScope.undefined });
 
     public ConfValue put(String name, String value, ESource source) {
