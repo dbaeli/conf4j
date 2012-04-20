@@ -6,6 +6,10 @@
 	<packaging>pom</packaging>
 	<version>0.1-SNAPSHOT</version>
 	<name>conf4j-root</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
