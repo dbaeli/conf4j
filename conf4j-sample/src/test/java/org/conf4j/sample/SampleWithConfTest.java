@@ -2,9 +2,7 @@ package org.conf4j.sample;
 
 import static org.conf4j.service.ConfServiceInstance.CONF;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-import org.conf4j.sample.SampleWithConf;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
