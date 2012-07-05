@@ -1,47 +1,23 @@
 Title:
 
-[en] App configuration in a nutshell : illustrated DevOps.
-
-[fr] DevOps illustré : Configuration jungle
+App configuration in a nutshell : illustrated DevOps.
 
 Summary:
 
-[en] Mixing dev and ops in the same team is on most team management roadmap. We try to illustrate through typical application configuration issues some best practice and patterns to make the way more easy.
+Mixing dev and ops in the same team is on most team management roadmap. We try to illustrate typical application configuration issues and explain some best practice and patterns to make the way more easy.
 
-[fr] L'approche DevOps essaie de rapprocher les développeurs et les administrateurs système, ce Quickie illustre le cas de la configuration des applications en présentant le besoin d'amélioration de la gestion des paramètres de configuration d'une application, avec une solution possible.
-
-[en] Our code base contains many parameters : option, url, emails ... some params with a default value that never change, some params require to change during the application changing. Managing the staging configuration by hand is error prone and could introduce some high friction between dev & ops.
+Our code base contains many parameters : option, url, emails ... some params with a default value that never change, some params to change during the application staging. Managing the configuration by hand is error prone and could introduce some high friction between dev and ops.
 
 * What are the basic principles of an application parameters gouvernance ?
 * How to avoid manual management that could be error prone ?
-* How to ensure an up to date documentation of each version delivered ?
+* How to ensure an up-to-date documentation of each version delivered ?
 * How to trace and debug the configuration values at each application startup in production ?
 
-[fr] Notre codes contient beaucoup de paramètres : des options, des URL, des Emails, ... ces valeurs changent fréquemment entre l'environnement de production, de recette, le poste de développeur. Gérés manuellement ils causent beaucoup de bugs évitables. 
-
-* Quels sont les principes d'une bonne gouvernance des paramètres ?
-* Comment éviter un bricolage manuel et voué à générer des erreurs d'utilisation ?
-* Comment avoir une documentation du paramétrage de votre application toujours à jour ?
-* Comment connaitre l'origine de la valeur utilisée (paramètre JVM, variable d'environnement, valeur par défaut) ?
-
-[en] Becoming aware of the configuration gouvernance is becoming the basic for starting some DevOps practice: we show some pragmatic demo to begin quickly.
-
-[fr] Le but est une prise de conscience sur le sujet, et la présentation d'une mise en oeuvre simple.
+Becoming aware of the configuration gouvernance is a basic for starting some DevOps practice: we show some pragmatic demo to begin quickly.
 
 Speaker bio:
 
-Dimitri BAELI (Datox, Almonde, PrimaSolution, eXo Platform, Courtanet) baigne dans l'univers Java depuis plus de 10 ans, sa passion pour les usines logicielles, l'organisation des développements, et les méthodes agiles ne l'empêche pas de mettre les mains dans le cambouis et développer des outils utiles aux développeurs.
-
-* Introduction à Scrum 2010 : Vannes, NormandyJUG
-* REX Agilité chez eXo 2010 : Rennes, Kiev (Agileee)
-* Productivité des développements : Nantes 2010, Lille 2008
-* Dojo TDD 2010/11: NormandyJUG, Agile Tour Marseilles, NantesJUG
-
-Co-Création du « Normandy Agile User Group » en 2010, pour l'organisation de conférences et soirées sur le thème de l'agilité. Agile Tour Rouen 2010 & 2011 : 100 personnes autour de l'agilité à Rouen, 10+ intervenants.
-
-[fr] Gilles travaille depuis plus de 10 ans pour différents éditeurs de logiciels (ILOG, PrimaSolution, Courtanet) sur des sujets très variés: librairie graphique 2D, moteur de règles, plate-forme de services pour J2EE, code génération de modèle métier. Actuellement, il est architecte pour le site Assuremieux.com (comparateur d'assurances), et aime aussi prendre l'air de temps en temps à San Francisco ou à Anvers.
-
-[en] Gilles is a 10+ software developer working for various software vendors (ILOG, PrimaSolution, Courtanet) : graphic 2D librairy, rules engine, J2EE service platform, domain model code generation. He is actually software architect for the insurance comparaison web site LesFurets.com. He loves to feel the freech air of San Francisco and Anvers.
+Gilles is a 10+ software developer working for various software vendors (ILOG, PrimaSolution, Courtanet) : graphic 2D librairy, rules engine, J2EE service platform, domain model code generation. He is actually software architect for the insurance comparaison web site LesFurets.com. He loves to feel the fresh air of San Francisco and Anvers.
 
 * 'DevOps illustré: Configuration jungle' : Devoxx France 2012, Paris
 * 'I18n mon amour et APT par l'exemple' : BreizhCamp 2012, Rennes
