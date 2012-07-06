@@ -4,14 +4,16 @@ App configuration in a nutshell : illustrated DevOps.
 
 Summary:
 
-Mixing dev and ops in the same team is on most team management roadmap. We try to illustrate typical application configuration issues and explain some best practice and patterns to make the way more easy.
-
-Our code base contains many parameters : option, url, emails ... some params with a default value that never change, some params to change during the application staging. Managing the configuration by hand is error prone and could introduce some high friction between dev and ops.
+Application configuration parameters is one key element in the Dev and Ops battle. This quickie will focus on how to answer the following questions :
 
 * What are the basic principles of an application parameters gouvernance ?
 * How to avoid manual management that could be error prone ?
 * How to ensure an up-to-date documentation of each version delivered ?
 * How to trace and debug the configuration values at each application startup in production ?
+
+Mixing dev and ops in the same team is on most team management roadmap. We illustrate typical application configuration issues and explain some best practice and patterns to make the way more easy.
+
+Our code base contains many parameters : options, urls, emails ... some params with a default value that never change, some params to change during the application staging. Managing the configuration by hand is error prone and could introduce some high friction between dev and ops.
 
 Becoming aware of the configuration gouvernance is a basic for starting some DevOps practice: we show some pragmatic demo to begin quickly.
 
