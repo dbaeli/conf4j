@@ -1,6 +1,6 @@
 Title:
 
-App configuration in a nutshell : illustrated DevOps.
+Illustrated DevOps: App configuration in a nutshell.
 
 Summary:
 
@@ -19,7 +19,17 @@ Becoming aware of the configuration gouvernance is a basic for starting some Dev
 
 Speaker bio:
 
-Gilles is a 10+ software developer working for various software vendors (ILOG, PrimaSolution, Courtanet) : graphic 2D librairy, rules engine, J2EE service platform, domain model code generation. He is actually software architect for the insurance comparaison web site LesFurets.com. He loves to feel the fresh air of San Francisco and Anvers.
+Dimitri BAELI (Datox, Almonde, PrimaSolution, eXo Platform, Courtanet) after 10 years of Java coding mainly for software vendors, dimitri nows focuses on development tooling and development team capabilities. Not forgetting to deep dive in the code when neeeded.
 
-* 'DevOps illustré: Configuration jungle' : Devoxx France 2012, Paris
-* 'I18n mon amour et APT par l'exemple' : BreizhCamp 2012, Rennes
+* Devoxx France 2012 : "Devops mercenaires", "devops jungle quicky", and "Kanban pour les nuls !"
+* BreizhCamp 2012 : i18n mon amour
+* REX Agilité chez eXo 2010 : Agile Breizh Rennes, Kiev (Agileee 2010)
+* Dev productivity : Nantes JUG 2010, Agile Tour Lille 2008
+* Dojo TDD 2010/11: NormandyJUG, Agile Tour Marseilles, NantesJUG
+* Co-creation of « Normandy Agile User Group » 2010
+* Organize the Agile Tour Rouen 2010 & 2011 (100p / 15 speakers)
+
+Gilles is a 10+ software developer working for various software vendors (ILOG, PrimaSolution, Courtanet) : graphic 2D librairy, rules engine, J2EE service platform, domain model code generation. He is actually software architect for the insurance comparison web site LesFurets.com. He loves to feel the fresh air of San Francisco and Anvers.
+
+* "DevOps illustré: Configuration jungle" : Devoxx France 2012, Paris
+* "I18n mon amour et APT par l'exemple" : BreizhCamp 2012, Rennes
